@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TKM-AI — Ship reliable AI agents</title>
+<meta name="description" content="TKM-AI helps teams optimize and deploy LLM-based agents — cutting latency and cost while keeping quality high, from prototype to production." />
+<meta name="theme-color" content="#ffffff" />
+<link rel="canonical" href="https://tkm-ai.com/" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="TKM-AI — Ship reliable AI agents" />
+<meta property="og:description" content="Optimize, deploy, and observe LLM-based agents — lower cost, faster responses, reliable at scale." />
+<meta property="og:url" content="https://tkm-ai.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+<!-- Favicon: black tile + white diamond, matching the brand mark -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181B'/%3E%3Crect x='10.5' y='10.5' width='11' height='11' rx='3' fill='%23fff' transform='rotate(45 16 16)'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --surface: #FFFFFF;
+    --raised: #F6F6F7;
+    --nav-bg: rgba(255,255,255,0.82);
+    --ink: #18181B;
+    --muted: #5C5C63;
+    --faint: #8A8A92;
+    --line: #E8E8EA;
+    --line-strong: #D6D6DB;
+    --brand: #18181B;        /* monochrome accent = near-black */
+    --brand-strong: #000000;
+    --brand-tint: #EEEEF0;   /* light grey tint */
+    --deep: #131316;         /* dark band */
+    --maxw: 1200px;
+    --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    position: relative;
+  }
+  .backdrop { position: fixed; inset: 0; z-index: -1; background: var(--paper); }
+  h1, h2, h3, h4, .brand, .hero-title, .stat .num { font-family: var(--font-head); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.02em; font-size: 1.12rem; }
+  .brand .mark {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--ink); position: relative; flex: 0 0 auto;
+    display: grid; place-items: center;
+  }
+  .brand .mark::before {
+    content: ""; width: 13px; height: 13px; border-radius: 4px;
+    background: var(--paper); transform: rotate(45deg);
+  }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a { color: var(--muted); font-weight: 500; font-size: 0.95rem; transition: color .15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 0.95rem; border-radius: 10px;
+    padding: 11px 20px; cursor: pointer; border: 1px solid transparent;
+    transition: transform .12s, background .15s, border-color .15s;
+  }
+  .btn-primary { background: var(--brand); color: #fff; }
+  .btn-primary:hover { background: var(--brand-strong); transform: translateY(-1px); }
+  .btn-ghost { color: var(--ink); border-color: var(--line-strong); background: var(--surface); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 88px 0 72px; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--surface); border: 1px solid var(--line-strong);
+    padding: 6px 14px 6px 8px; border-radius: 999px; font-size: 0.82rem; font-weight: 500;
+    color: var(--muted); margin-bottom: 26px;
+  }
+  .pill .tag { background: var(--ink); color: #fff; font-weight: 700; font-size: 0.72rem; padding: 3px 9px; border-radius: 999px; letter-spacing: .02em; }
+  h1.hero-title {
+    font-size: clamp(2.6rem, 4.6vw, 3.85rem); line-height: 1.04;
+    letter-spacing: -0.035em; font-weight: 800; margin-bottom: 22px;
+  }
+  h1.hero-title .accent { color: var(--ink); box-shadow: inset 0 -0.14em 0 var(--line-strong); }
+  .hero-sub { font-size: 1.2rem; color: var(--muted); max-width: 34ch; margin-bottom: 34px; }
+  .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero-note { margin-top: 20px; font-size: 0.86rem; color: var(--faint); display: flex; align-items: center; gap: 8px; }
+  .hero-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px rgba(24,24,27,.12); }
+
+  /* ---------- Logos / trust marquee ---------- */
+  .trust { padding: 26px 0 14px; }
+  .trust-title { text-align: center; font-size: 0.82rem; color: var(--faint); margin-bottom: 26px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .marquee { position: relative; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .marquee-track { display: flex; align-items: center; gap: 64px; width: max-content;
+    animation: marquee-scroll 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .logo-item { display: flex; align-items: center; gap: 16px; flex: 0 0 auto; }
+  .logo-item img { width: 58px; height: 58px; border-radius: 12px; flex: 0 0 auto; display: block;
+    filter: grayscale(1); opacity: .6; }
+  .logo-item span { font-weight: 600; font-size: 1.5rem; color: var(--faint); white-space: nowrap; letter-spacing: -0.02em; }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  /* ---------- Stats / pillars band ---------- */
+  .stats { margin: 64px 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface); }
+  .stat { padding: 38px 32px; border-right: 1px solid var(--line); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat .num { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+  .stat .desc { margin-top: 14px; color: var(--muted); font-size: 0.98rem; max-width: 28ch; margin-left: auto; margin-right: auto; }
+  .stat .desc b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- Section header ---------- */
+  .section { padding: 78px 0; }
+  .sec-head { max-width: 640px; margin-bottom: 52px; }
+  .sec-head h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); letter-spacing: -0.035em; font-weight: 800; line-height: 1.08; margin: 14px 0 16px; }
+  .sec-head p { color: var(--muted); font-size: 1.12rem; }
+
+  /* ---------- Features ---------- */
+  .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .feat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 30px; transition: border-color .18s, transform .18s, box-shadow .18s;
+  }
+  .feat:hover { border-color: var(--line-strong); transform: translateY(-3px); box-shadow: 0 20px 44px -26px rgba(24,24,27,.22); }
+  .feat .ico {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--brand-tint);
+    display: grid; place-items: center; margin-bottom: 20px; color: var(--ink);
+  }
+  .feat h3 { font-size: 1.28rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .feat p { color: var(--muted); font-size: 1rem; }
+  .feat .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .feat .tags span { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; color: var(--muted); border: 1px solid var(--line-strong); padding: 4px 9px; border-radius: 7px; }
+
+  /* ---------- How band (dark) ---------- */
+  .how { background: var(--deep); color: #F4F4F5; border-radius: 26px; padding: 64px 56px; }
+  .how .eyebrow { color: #A1A1AA; }
+  .how .sec-head h2 { color: #fff; }
+  .how .sec-head p { color: #C7C7CC; }
+  .how-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 8px; }
+  .how-step .n { font-family: "JetBrains Mono", monospace; color: #fff; font-size: 0.82rem; font-weight: 500; letter-spacing: .1em; }
+  .how-step h4 { font-size: 1.22rem; font-weight: 700; margin: 14px 0 8px; letter-spacing: -0.02em; }
+  .how-step p { color: #B6B6BC; font-size: 0.98rem; }
+  .how-step .line { height: 1px; background: rgba(255,255,255,.12); margin-top: 22px; position: relative; }
+  .how-step .line::before { content:""; position:absolute; left:0; top:-1px; width: 34px; height: 3px; background: #fff; border-radius: 2px; }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
+  .about-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 30px; }
+  .about-card .row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 0.96rem; gap: 16px; }
+  .about-card .row:last-child { border-bottom: none; }
+  .about-card .row span:first-child { color: var(--muted); }
+  .about-card .row span:last-child { font-weight: 700; text-align: right; }
+  .value-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .value { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+  .value h4 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 9px; }
+  .value p { color: var(--muted); font-size: 0.95rem; }
+
+  /* ---------- CTA ---------- */
+  .cta { margin: 30px 0 84px; }
+  .cta-box {
+    background: var(--deep);
+    border-radius: 26px; padding: 68px 56px; color: #fff; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px;
+  }
+  .cta-box::after { content:""; position:absolute; right:-80px; top:-80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,.05); }
+  .cta-box h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); letter-spacing: -0.035em; font-weight: 800; line-height: 1.06; }
+  .cta-box p { margin-top: 14px; color: rgba(255,255,255,.82); font-size: 1.08rem; }
+  .cta-box .cta-form { width: 100%; max-width: 480px; }
+  .signup { display: flex; gap: 10px; position: relative; z-index: 1; }
+  .signup input {
+    flex: 1; border: none; border-radius: 11px; padding: 14px 16px; font-size: 1rem; font-family: inherit;
+    background: #fff; color: var(--ink); outline: none;
+  }
+  .signup input::placeholder { color: var(--faint); }
+  .signup .btn { background: #fff; color: var(--ink); white-space: nowrap; }
+  .signup .btn:hover { background: #E8E8EA; }
+  .cta-fine { margin-top: 14px; font-size: 0.82rem; color: rgba(255,255,255,.72); position: relative; z-index: 1; }
+  .cta-fine a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 56px 0 40px; }
+  .foot-grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: 40px; }
+  .foot-brand p { color: var(--muted); font-size: 0.95rem; margin-top: 16px; max-width: 32ch; }
+  .foot-col h5 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); font-weight: 700; margin-bottom: 16px; }
+  .foot-col a { display: block; color: var(--muted); font-size: 0.95rem; padding: 5px 0; transition: color .15s; }
+  .foot-col a:hover { color: var(--ink); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 26px; border-top: 1px solid var(--line); color: var(--faint); font-size: 0.86rem; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .about-grid, .cta-box { grid-template-columns: 1fr; }
+    .feat-grid, .how-steps, .value-grid { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .how, .cta-box { padding: 44px 28px; }
+    .hero-visual { margin-top: 8px; }
+  }
+  @media (max-width: 560px) {
+    .feat-grid, .how-steps, .value-grid, .stats-grid, .foot-grid { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+
+  /* ============ INTERACTIVE SAVINGS CHART ============ */
+  .rchart { width: 100%; }
+  .rchart-body { display: flex; flex-direction: column; gap: 26px; }
+
+  /* workload tabs */
+  .seg { display: flex; gap: 6px; }
+  .seg button { font: inherit; font-size: .92rem; font-weight: 600; color: var(--muted); background: transparent; border: 0; border-radius: 9px; padding: 8px 16px; cursor: pointer; transition: background .18s, color .18s; }
+  .seg button:hover { color: var(--ink); }
+  .seg button[aria-selected="true"] { background: var(--brand-tint); color: var(--ink); }
+
+  /* comparison groups */
+  .rgroup .glabel { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+  .rgroup .glabel .lab { white-space: nowrap; font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); }
+  .rgroup .glabel .chip { white-space: nowrap; font-size: .84rem; font-weight: 700; color: var(--ink); }
+  .rrow { display: flex; align-items: center; gap: 14px; margin-bottom: 11px; }
+  .rrow:last-child { margin-bottom: 0; }
+  .rrow .name { width: 66px; flex: 0 0 auto; font-size: .82rem; font-weight: 600; color: var(--muted); }
+  .rrow.tkm .name { color: var(--ink); font-weight: 700; }
+  .rtrack { position: relative; flex: 1; height: 26px; background: color-mix(in srgb, var(--ink) 5%, transparent); border-radius: 7px; overflow: hidden; }
+  .rfill { position: absolute; left: 0; right: 0; top: 0; bottom: 0; transform-origin: left center; transform: scaleX(0); transition: transform .8s cubic-bezier(.22,.85,.25,1); }
+  .rfill.base { background: color-mix(in srgb, var(--ink) 18%, transparent); }
+  .rfill.tkm { background: var(--ink); }
+  .rrow .val { width: 86px; flex: 0 0 auto; text-align: right; font-family: "JetBrains Mono", monospace; font-size: .86rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .rrow.tkm .val { color: var(--ink); }
+
+  /* volume slider */
+  .rvol .vhead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+  .rvol .vhead .lab { font-size: .82rem; font-weight: 600; color: var(--muted); }
+  .rvol .vhead .num { font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--ink); font-size: .92rem; }
+  .rvol input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 12%, transparent); outline: none; cursor: pointer; }
+  .rvol input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); border: 3px solid var(--paper); box-shadow: 0 1px 4px rgba(24,24,27,.28); cursor: pointer; }
+  .rvol input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); border: 3px solid var(--paper); box-shadow: 0 1px 4px rgba(24,24,27,.28); cursor: pointer; }
+  .rsave { margin-top: 14px; font-size: .95rem; color: var(--muted); }
+  .rsave b { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -.02em; margin-right: 5px; }
+  .rnote { margin-top: 18px; font-size: .76rem; color: var(--faint); }
+
+  @media (prefers-reduced-motion: reduce) { .rfill { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="backdrop"></div>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#"><span class="mark"></span>TKM-AI</a>
+      <nav class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="pill"><span class="tag">AI</span> Built for production LLM agents</span>
+        <h1 class="hero-title">Ship AI agents that are <span class="accent">fast, cheap, and reliable.</span></h1>
+        <p class="hero-sub">TKM-AI helps teams optimize and deploy LLM-based agents — cutting latency and cost while keeping quality high. From prototype to production.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-note"><span class="dot"></span> Working with early teams building LLM agents</div>
+      </div>
+      <div class="hero-visual">
+        <div class="rchart" id="rchart">
+          <div class="rchart-body">
+            <div class="seg" role="tablist" aria-label="Workload">
+              <button role="tab" aria-selected="true" data-work="chat">Chat</button>
+              <button role="tab" aria-selected="false" data-work="rag">RAG</button>
+              <button role="tab" aria-selected="false" data-work="agents">Agents</button>
+            </div>
+
+            <div class="rgroup">
+              <div class="glabel"><span class="lab">Monthly cost</span><span class="chip" data-chip="cost">&#8595; 68%</span></div>
+              <div class="rrow base"><span class="name">Baseline</span><div class="rtrack"><div class="rfill base" data-fill="costBase"></div></div><span class="val" data-val="costBase">$4,200</span></div>
+              <div class="rrow tkm"><span class="name">TKM-AI</span><div class="rtrack"><div class="rfill tkm" data-fill="costTkm"></div></div><span class="val" data-val="costTkm">$1,340</span></div>
+            </div>
+
+            <div class="rgroup">
+              <div class="glabel"><span class="lab">p50 latency</span><span class="chip" data-chip="lat">3.3&#215; faster</span></div>
+              <div class="rrow base"><span class="name">Baseline</span><div class="rtrack"><div class="rfill base" data-fill="latBase"></div></div><span class="val" data-val="latBase">1,180 ms</span></div>
+              <div class="rrow tkm"><span class="name">TKM-AI</span><div class="rtrack"><div class="rfill tkm" data-fill="latTkm"></div></div><span class="val" data-val="latTkm">360 ms</span></div>
+            </div>
+
+            <div class="rvol">
+              <div class="vhead"><span class="lab">Requests / month</span><span class="num" data-val="vol">1.0M</span></div>
+              <input type="range" min="1" max="100" value="10" aria-label="Monthly request volume" id="rvolRange">
+              <div class="rsave"><b data-val="save">$2,860</b> saved / month</div>
+            </div>
+            <p class="rnote">Illustrative estimate based on typical workloads — your numbers will vary.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust">
+    <p class="trust-title">Support all agents</p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="logo-item"><img src="assets/logos/claude.png" alt="Claude Code" /><span>Claude Code</span></div>
+        <div class="logo-item"><img src="assets/logos/codex.png" alt="Codex" /><span>Codex</span></div>
+        <div class="logo-item"><img src="assets/logos/cursor.png" alt="Cursor" /><span>Cursor</span></div>
+        <div class="logo-item"><img src="assets/logos/antigravity.png" alt="Antigravity" /><span>Antigravity</span></div>
+        <div class="logo-item"><img src="assets/logos/deepseek.png" alt="DeepSeek" /><span>DeepSeek</span></div>
+        <div class="logo-item"><img src="assets/logos/gemini-cli.png" alt="Gemini CLI" /><span>Gemini CLI</span></div>
+        <div class="logo-item"><img src="assets/logos/openclaw.png" alt="OpenClaw" /><span>OpenClaw</span></div>
+        <div class="logo-item"><img src="assets/logos/copilot.png" alt="Copilot" /><span>Copilot</span></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="logo-item"><img src="assets/logos/claude.png" alt="Claude Code" /><span>Claude Code</span></div>
+        <div class="logo-item"><img src="assets/logos/codex.png" alt="Codex" /><span>Codex</span></div>
+        <div class="logo-item"><img src="assets/logos/cursor.png" alt="Cursor" /><span>Cursor</span></div>
+        <div class="logo-item"><img src="assets/logos/antigravity.png" alt="Antigravity" /><span>Antigravity</span></div>
+        <div class="logo-item"><img src="assets/logos/deepseek.png" alt="DeepSeek" /><span>DeepSeek</span></div>
+        <div class="logo-item"><img src="assets/logos/gemini-cli.png" alt="Gemini CLI" /><span>Gemini CLI</span></div>
+        <div class="logo-item"><img src="assets/logos/openclaw.png" alt="OpenClaw" /><span>OpenClaw</span></div>
+        <div class="logo-item"><img src="assets/logos/copilot.png" alt="Copilot" /><span>Copilot</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="stats wrap reveal">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">Cost</div><div class="desc">Prompt compression, caching, and token trimming reduce <b>spend</b> without sacrificing quality.</div></div>
+      <div class="stat"><div class="num">Speed</div><div class="desc">Adaptive routing sends each request to the fastest <b>model</b> that can handle it.</div></div>
+      <div class="stat"><div class="num">Scale</div><div class="desc">Autoscaling infrastructure with tracing, evals, and automatic <b>failover</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- PRODUCT / FEATURES -->
+  <section class="section wrap" id="product">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The platform</span>
+      <h2>Everything you need to run agents in production</h2>
+      <p>One platform to optimize, deploy, and observe LLM-based agents — so your team ships quality without burning budget.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <h3>Agent optimization</h3>
+        <p>Compress prompts, cache aggressively, and trim wasted tokens automatically — without touching your agent logic.</p>
+        <div class="tags"><span>prompt compression</span><span>semantic cache</span></div>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg></div>
+        <h3>Efficient deployment</h3>
+        <p>Push an agent and we autoscale it across regions with sub-second cold starts. No infra to babysit.</p>
+        <div class="tags"><span>autoscale</span><span>edge deploy</span></div>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg></div>
+        <h3>Observability &amp; eval</h3>
+        <p>Trace every step, score quality with custom evals, and catch regressions before they reach a user.</p>
+        <div class="tags"><span>tracing</span><span>eval suites</span></div>
+      </div>
+      <div class="feat reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12M6 21a3 3 0 100-6 3 3 0 000 6zM18 9a3 3 0 100-6 3 3 0 000 6zM18 9c0 6-12 4-12 6"/></svg></div>
+        <h3>Adaptive routing</h3>
+        <p>Route each request to the right model by cost, latency, and capability — and fail over automatically.</p>
+        <div class="tags"><span>multi-model</span><span>auto-failover</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section wrap" id="how">
+    <div class="how reveal">
+      <div class="sec-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From prototype to production in three steps</h2>
+        <p>Bring the agent you already have. We handle the rest of the path to scale.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="n">01</span>
+          <h4>Connect your agent</h4>
+          <p>Wrap your existing LLM calls with our SDK, or import from LangChain and LlamaIndex in a few lines.</p>
+          <div class="line"></div>
+        </div>
+        <div class="how-step">
+          <span class="n">02</span>
+          <h4>Optimize automatically</h4>
+          <p>TKM-AI profiles every run, then compresses, caches, and routes to keep quality up and cost down.</p>
+          <div class="line"></div>
+        </div>
+        <div class="how-step">
+          <span class="n">03</span>
+          <h4>Deploy &amp; monitor</h4>
+          <p>Ship to autoscaling infra with one command and watch traces, costs, and evals in real time.</p>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section wrap" id="about">
+    <div class="about-grid">
+      <div class="reveal">
+        <span class="eyebrow">About us</span>
+        <h2 style="font-size:clamp(2rem,3.4vw,2.7rem);letter-spacing:-0.035em;font-weight:800;line-height:1.08;margin:14px 0 16px;">Built by engineers obsessed with agent performance</h2>
+        <p style="color:var(--muted);font-size:1.08rem;">TKM-AI exists to make LLM-based agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. We focus on the unglamorous parts: latency, cost, and reliability under real traffic.</p>
+        <div class="about-card" style="margin-top:28px;">
+          <div class="row"><span>Focus</span><span>LLM agent optimization</span></div>
+          <div class="row"><span>What we tackle</span><span>Cost · Latency · Reliability</span></div>
+          <div class="row"><span>Deployment</span><span>Autoscaling infrastructure</span></div>
+          <div class="row"><span>Stage</span><span>Working with early teams</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="value-grid">
+          <div class="value"><h4>Cost-aware by default</h4><p>Every optimization is measured against quality, not just price — so you never trade accuracy for a lower bill.</p></div>
+          <div class="value"><h4>Production-first</h4><p>Tracing, evaluations, and automatic failover are built in from day one, not bolted on later.</p></div>
+          <div class="value"><h4>Model-agnostic</h4><p>Route across providers and models. You're never locked into a single vendor.</p></div>
+          <div class="value"><h4>Developer-friendly</h4><p>A drop-in SDK and clean APIs that fit the stack and workflow you already have.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta wrap" id="contact">
+    <div class="cta-box reveal">
+      <div>
+        <h2>Let's make your agents cheaper and faster</h2>
+        <p>Tell us about your agents and we'll show you where the wins are.</p>
+      </div>
+      <div class="cta-form">
+        <form class="signup" id="contactForm">
+          <input type="email" id="contactEmail" placeholder="you@company.com" aria-label="Work email" required />
+          <button class="btn" type="submit">Get in touch</button>
+        </form>
+        <div class="cta-fine">Prefer email? Reach us at <a href="mailto:hello@tkm-ai.com">hello@tkm-ai.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#"><span class="mark"></span>TKM-AI</a>
+          <p>The platform to optimize, deploy, and observe LLM-based agents in production.</p>
+        </div>
+        <div class="foot-col"><h5>Product</h5><a href="#product">Optimization</a><a href="#product">Deployment</a><a href="#product">Observability</a><a href="#product">Routing</a></div>
+        <div class="foot-col"><h5>Company</h5><a href="#about">About</a><a href="#contact">Contact</a><a href="mailto:hello@tkm-ai.com">Email us</a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>&copy; 2026 TKM-AI</span>
+        <span>tkm-ai.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Scroll reveal */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    /* Contact form -> mailto (no backend needed on static hosting) */
+    (function contact() {
+      const form = document.getElementById('contactForm');
+      if (!form) return;
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const email = (document.getElementById('contactEmail').value || '').trim();
+        const subject = encodeURIComponent('TKM-AI — interested in optimizing my agents');
+        const body = encodeURIComponent('Hi TKM-AI team,\n\nI\'d like to learn more about optimizing and deploying my LLM agents.\n\n' + (email ? 'You can reach me at: ' + email + '\n' : ''));
+        window.location.href = 'mailto:hello@tkm-ai.com?subject=' + subject + '&body=' + body;
+      });
+    })();
+
+    /* ---------- Interactive savings chart ---------- */
+    (function savingsChart() {
+      const root = document.getElementById('rchart');
+      if (!root) return;
+      // cost = $ per 1M requests/mo · lat = p50 ms
+      const WORK = {
+        chat:   { baseC: 4200,  tkmC: 1340, baseL: 1180, tkmL: 360 },
+        rag:    { baseC: 6800,  tkmC: 2450, baseL: 1640, tkmL: 520 },
+        agents: { baseC: 11500, tkmC: 3900, baseL: 2950, tkmL: 880 },
+      };
+      let cur = 'chat', volM = 1.0, started = false;
+
+      const $ = (sel) => root.querySelector(sel);
+      const fills = {
+        costBase: $('[data-fill=costBase]'), costTkm: $('[data-fill=costTkm]'),
+        latBase:  $('[data-fill=latBase]'),  latTkm:  $('[data-fill=latTkm]'),
+      };
+      const vals = {
+        costBase: $('[data-val=costBase]'), costTkm: $('[data-val=costTkm]'),
+        latBase:  $('[data-val=latBase]'),  latTkm:  $('[data-val=latTkm]'),
+        save:     $('[data-val=save]'),     vol:     $('[data-val=vol]'),
+      };
+      const chips = { cost: $('[data-chip=cost]'), lat: $('[data-chip=lat]') };
+      const buttons = Array.from(root.querySelectorAll('.seg button'));
+      const range = document.getElementById('rvolRange');
+
+      const money = (n) => '$' + Math.round(n).toLocaleString('en-US');
+      const ms = (n) => Math.round(n).toLocaleString('en-US') + ' ms';
+
+      function tween(el, to, fmt) {
+        const from = parseFloat(el.dataset.n || '0');
+        el.dataset.n = to;
+        const t0 = performance.now(), dur = 620; let done = false;
+        const finish = () => { if (!done) { done = true; el.textContent = fmt(to); } };
+        (function step(t) {
+          const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+          if (k >= 1) { finish(); return; }
+          el.textContent = fmt(from + (to - from) * e);
+          requestAnimationFrame(step);
+        })(performance.now());
+        setTimeout(finish, dur + 80); // fallback if rAF is throttled
+      }
+      function setNow(el, to, fmt) { el.dataset.n = to; el.textContent = fmt(to); }
+
+      function render(animate) {
+        const d = WORK[cur];
+        const cb = d.baseC * volM, ct = d.tkmC * volM, saved = cb - ct;
+        fills.costBase.style.transform = 'scaleX(1)';
+        fills.costTkm.style.transform  = 'scaleX(' + (d.tkmC / d.baseC) + ')';
+        fills.latBase.style.transform  = 'scaleX(1)';
+        fills.latTkm.style.transform   = 'scaleX(' + (d.tkmL / d.baseL) + ')';
+        const put = animate ? tween : setNow;
+        put(vals.costBase, cb, money);
+        put(vals.costTkm, ct, money);
+        put(vals.save, saved, money);
+        if (animate) { tween(vals.latBase, d.baseL, ms); tween(vals.latTkm, d.tkmL, ms); }
+        else { setNow(vals.latBase, d.baseL, ms); setNow(vals.latTkm, d.tkmL, ms); }
+        vals.vol.textContent = volM.toFixed(1) + 'M';
+        chips.cost.innerHTML = '&#8595; ' + Math.round((1 - d.tkmC / d.baseC) * 100) + '%';
+        chips.lat.innerHTML = (d.baseL / d.tkmL).toFixed(1) + '&#215; faster';
+      }
+
+      buttons.forEach((b) => b.addEventListener('click', () => {
+        if (b.dataset.work === cur) return;
+        buttons.forEach((x) => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+        cur = b.dataset.work;
+        render(true);
+      }));
+      range.addEventListener('input', () => { volM = +range.value / 10; render(false); });
+
+      // entrance: bars grow from 0 via setTimeout (rAF can be throttled offscreen)
+      function start() { if (started) return; started = true; render(true); }
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => setTimeout(start, 60));
+      } else {
+        setTimeout(start, 60);
+      }
+    })();
+  </script>
+</body>
+</html>
