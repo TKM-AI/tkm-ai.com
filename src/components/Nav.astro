@@ -1,10 +1,10 @@
 ---
+// Shared top nav across the company home + product pages.
+// Links point at real routes; the "Get in touch" CTA scrolls to the current page's #contact band.
 const links = [
-  { href: '/#product', label: 'Product' },
-  { href: '/#how', label: 'How it works' },
-  { href: '/#about', label: 'About' },
+  { href: '/uniro', label: 'Uniro' },
+  { href: '/papermentor', label: 'PaperMentor' },
   { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact' },
 ];
 ---
 <header class="nav">
@@ -14,7 +14,7 @@ const links = [
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
     <div class="nav-cta">
-      <a href="/#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
     </div>
   </div>
 </header>

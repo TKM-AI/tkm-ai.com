@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import ProductHero from '../components/ProductHero.astro';
+import ReviewMockup from '../components/ReviewMockup.astro';
+import StatsBand from '../components/StatsBand.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import About from '../components/About.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const pillars = [
+  { num: 'Review', desc: 'Structure, clarity, methodology, and argument — <b>feedback</b> in minutes, not weeks.' },
+  { num: 'Integrity', desc: 'Citation checks and unsupported-<b>claim</b> detection on every draft.' },
+  { num: 'Scale', desc: 'Serve <b>thousands</b> of concurrent students without adding staff.' },
+];
+
+const features = [
+  {
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h9l5 5v13a0 0 0 01 0 0H5z"/><path d="M14 3v5h5M8 13h8M8 17h6"/></svg>',
+    title: 'Structured paper review',
+    desc: 'Assess structure, clarity, methodology, and argument against your rubric — with specific, line-level suggestions a student can act on.',
+    tags: ['rubric-aligned', 'line-level'],
+  },
+  {
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>',
+    title: 'Citation & integrity checks',
+    desc: 'Verify references, flag incomplete or missing citations, and surface claims the paper does not actually support.',
+    tags: ['citation check', 'claim detection'],
+  },
+  {
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>',
+    title: 'Scales to every student',
+    desc: 'Deploy department-wide and review thousands of drafts concurrently — every student gets feedback in minutes, not weeks.',
+    tags: ['concurrent', 'self-serve'],
+  },
+  {
+    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="currentColor"/><circle cx="15" cy="12" r="2" fill="currentColor"/><circle cx="8" cy="18" r="2" fill="currentColor"/></svg>',
+    title: 'Faculty in control',
+    desc: 'Set the rubric, keep oversight, and stay in the loop. PaperMentor assists learning with feedback — it never grades for you.',
+    tags: ['instructor controls', 'oversight'],
+  },
+];
+
+const steps = [
+  { n: '01', title: 'Submit a draft', desc: 'Students upload a paper through your LMS or a simple web link — no new accounts to manage.' },
+  { n: '02', title: 'PaperMentor reviews', desc: 'It checks structure, citations, and claims against your rubric and returns specific, actionable feedback in minutes.' },
+  { n: '03', title: 'Students improve', desc: 'Each student revises with concrete guidance before the deadline — and faculty get their time back.' },
+];
+
+const academicFacts = [
+  { k: 'Focus', v: 'Academic writing feedback' },
+  { k: 'Audience', v: 'Universities & students' },
+  { k: 'Deployment', v: 'Department-wide · LMS-ready' },
+  { k: 'Approach', v: 'Assists learning — never grades for you' },
+];
+const academicValues = [
+  { title: 'Pedagogy first', desc: 'Feedback that teaches. Every comment explains the why and points to a concrete next step.' },
+  { title: 'Academic integrity', desc: 'Citation-aware and transparent. PaperMentor flags issues — it never ghost-writes a paper.' },
+  { title: 'Privacy-conscious', desc: "Student work stays the institution's. We don't train on your submissions." },
+  { title: 'Faculty-aligned', desc: 'Your rubric, your oversight. Instructors stay in the loop on every review.' },
+];
+---
+<BaseLayout
+  title="PaperMentor — Academic paper review at university scale | TKM-AI"
+  description="PaperMentor is an academic agent that reviews papers, checks citations, and returns structured, rubric-aligned feedback — deployable department-wide to mentor thousands of students at once."
+  path="/papermentor"
+>
+  <Nav />
+  <main>
+    <ProductHero
+      tag="EDU"
+      pill="PaperMentor · for universities"
+      title="Mentor every student's"
+      titleAccent="writing, at scale."
+      sub="PaperMentor is an academic agent that reviews papers, checks citations, and returns structured, rubric-aligned feedback — so every student gets thoughtful guidance, and faculty get their time back."
+      primaryHref="#contact"
+      primaryLabel="Book a pilot"
+      secondaryHref="#how"
+      secondaryLabel="See how it works"
+      note="Deployable department-wide, LMS-ready"
+    >
+      <ReviewMockup />
+    </ProductHero>
+
+    <StatsBand stats={pillars} />
+    <Features
+      eyebrow="What it does"
+      title="A teaching assistant for academic writing"
+      intro="PaperMentor reads like a careful reviewer and explains like a mentor — at a scale no teaching team can staff."
+      features={features}
+    />
+    <HowItWorks
+      eyebrow="How it works"
+      title="From draft to better writing in minutes"
+      intro="Drop it into the workflow students already use. No new accounts, no extra grading load."
+      steps={steps}
+    />
+    <About
+      eyebrow="Built for academia"
+      title="Designed with educators, for learning"
+      lead="PaperMentor exists to give every student the kind of detailed, timely feedback that usually only a handful receive — while keeping faculty in control and academic integrity intact."
+      facts={academicFacts}
+      values={academicValues}
+    />
+    <CTA
+      title="Bring PaperMentor to your department"
+      subtitle="Tell us about your courses and we'll set up a pilot for your students."
+      buttonLabel="Book a pilot"
+      mailSubject="TKM-AI — PaperMentor pilot"
+      mailBody={"Hi TKM-AI team,\n\nI'd like to explore a PaperMentor pilot for my department.\n\n"}
+    />
+  </main>
+  <Footer />
+</BaseLayout>

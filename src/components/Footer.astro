@@ -1,14 +1,12 @@
 ---
-const product = [
-  { href: '/#product', label: 'Optimization' },
-  { href: '/#product', label: 'Deployment' },
-  { href: '/#product', label: 'Observability' },
-  { href: '/#product', label: 'Routing' },
+const products = [
+  { href: '/uniro', label: 'Uniro' },
+  { href: '/papermentor', label: 'PaperMentor' },
 ];
 const company = [
-  { href: '/#about', label: 'About' },
+  { href: '/', label: 'Home' },
   { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '#contact', label: 'Contact' },
   { href: 'mailto:hello@tkm-ai.com', label: 'Email us' },
 ];
 ---
@@ -17,11 +15,11 @@ const company = [
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="/"><span class="mark"></span>TKM-AI</a>
-        <p>The platform to optimize, deploy, and observe LLM-based agents in production.</p>
+        <p>The company building the tools that take AI agents from prototype to scale — optimized, deployed, and observed.</p>
       </div>
       <div class="foot-col">
-        <h5>Product</h5>
-        {product.map((l) => <a href={l.href}>{l.label}</a>)}
+        <h5>Products</h5>
+        {products.map((l) => <a href={l.href}>{l.label}</a>)}
       </div>
       <div class="foot-col">
         <h5>Company</h5>

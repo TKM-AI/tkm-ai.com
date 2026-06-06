@@ -1,0 +1,45 @@
+---
+// Generic product-page hero: copy on the left, a visual passed in via <slot/> on the right.
+// Reuses the existing .hero / .hero-grid styles. Used by Uniro and PaperMentor.
+interface Props {
+  tag?: string;
+  pill?: string;
+  title: string;
+  titleAccent?: string;
+  sub: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  note?: string;
+}
+const {
+  tag = 'AI',
+  pill = '',
+  title,
+  titleAccent = '',
+  sub,
+  primaryHref = '#contact',
+  primaryLabel = 'Get in touch',
+  secondaryHref = '#how',
+  secondaryLabel = 'See how it works',
+  note = '',
+} = Astro.props;
+---
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      {pill && <span class="pill"><span class="tag">{tag}</span> {pill}</span>}
+      <h1 class="hero-title">{title} {titleAccent && <span class="accent">{titleAccent}</span>}</h1>
+      <p class="hero-sub">{sub}</p>
+      <div class="hero-actions">
+        <a href={primaryHref} class="btn btn-primary">{primaryLabel} <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a href={secondaryHref} class="btn btn-secondary">{secondaryLabel}</a>
+      </div>
+      {note && <div class="hero-note"><span class="dot"></span> {note}</div>}
+    </div>
+    <div class="hero-visual">
+      <slot />
+    </div>
+  </div>
+</section>

@@ -1,16 +1,29 @@
 ---
 // Contact form builds a mailto: link on submit — no backend (static hosting).
+// Subject/body come from props via data-* attributes (Astro <script> can't read props directly).
+interface Props {
+  id?: string; title?: string; subtitle?: string; buttonLabel?: string;
+  mailSubject?: string; mailBody?: string;
+}
+const {
+  id = 'contact',
+  title = "Let's make your agents cheaper and faster",
+  subtitle = "Tell us about your agents and we'll show you where the wins are.",
+  buttonLabel = 'Get in touch',
+  mailSubject = 'TKM-AI — interested in optimizing my agents',
+  mailBody = "Hi TKM-AI team,\n\nI'd like to learn more about optimizing and deploying my LLM agents.\n\n",
+} = Astro.props;
 ---
-<section class="cta wrap" id="contact">
+<section class="cta wrap" id={id}>
   <div class="cta-box reveal">
     <div>
-      <h2>Let's make your agents cheaper and faster</h2>
-      <p>Tell us about your agents and we'll show you where the wins are.</p>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
     </div>
     <div class="cta-form">
-      <form class="signup" id="contactForm">
+      <form class="signup" id="contactForm" data-subject={mailSubject} data-body={mailBody}>
         <input type="email" id="contactEmail" placeholder="you@company.com" aria-label="Work email" required />
-        <button class="btn btn-on-teal" type="submit">Get in touch</button>
+        <button class="btn btn-on-teal" type="submit">{buttonLabel}</button>
       </form>
       <div class="cta-fine">Prefer email? Reach us at <a href="mailto:hello@tkm-ai.com">hello@tkm-ai.com</a></div>
     </div>
@@ -24,11 +37,9 @@
       ev.preventDefault();
       const input = document.getElementById('contactEmail') as HTMLInputElement;
       const email = (input?.value || '').trim();
-      const subject = encodeURIComponent('TKM-AI — interested in optimizing my agents');
-      const body = encodeURIComponent(
-        "Hi TKM-AI team,\n\nI'd like to learn more about optimizing and deploying my LLM agents.\n\n" +
-        (email ? 'You can reach me at: ' + email + '\n' : '')
-      );
+      const subject = encodeURIComponent(form.dataset.subject || 'TKM-AI — get in touch');
+      const bodyBase = form.dataset.body || 'Hi TKM-AI team,\n\n';
+      const body = encodeURIComponent(bodyBase + (email ? 'You can reach me at: ' + email + '\n' : ''));
       window.location.href = 'mailto:hello@tkm-ai.com?subject=' + subject + '&body=' + body;
     });
   }

@@ -2,8 +2,8 @@
 import '../styles/global.css';
 interface Props { title?: string; description?: string; path?: string; }
 const {
-  title = 'TKM-AI — Ship reliable AI agents',
-  description = 'TKM-AI helps teams optimize and deploy LLM-based agents — cutting latency and cost while keeping quality high, from prototype to production.',
+  title = 'TKM — Tools for AI agents, from prototype to scale',
+  description = 'TKM builds the tools that take AI agents to production — Uniro for optimal cost-performance routing, and PaperMentor for academic paper review at university scale.',
   path = '/',
 } = Astro.props;
 const canonical = new URL(path, Astro.site ?? 'https://tkm-ai.com').href;
@@ -25,9 +25,18 @@ const canonical = new URL(path, Astro.site ?? 'https://tkm-ai.com').href;
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141413'/%3E%3Crect x='10.5' y='10.5' width='11' height='11' rx='3' fill='%23faf9f5' transform='rotate(45 16 16)'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:opsz,wght@17..18,400..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
   <slot />
+  <script>
+    // Scroll reveal — add .in to .reveal elements as they enter the viewport (all pages).
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
 </body>
 </html>

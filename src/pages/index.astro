@@ -1,35 +1,52 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
+import HomeHero from '../components/HomeHero.astro';
 import TrustMarquee from '../components/TrustMarquee.astro';
 import StatsBand from '../components/StatsBand.astro';
-import Features from '../components/Features.astro';
+import ProductsShowcase from '../components/ProductsShowcase.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import About from '../components/About.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+
+const approachSteps = [
+  { n: '01', title: 'Optimize', desc: 'Compress, cache, and route every request so your agents run lean — without touching their logic.' },
+  { n: '02', title: 'Deploy', desc: 'Ship to autoscaling infrastructure in one step, from prototype to global production.' },
+  { n: '03', title: 'Observe', desc: 'Trace every run, score quality with evals, and catch regressions before your users do.' },
+];
+
+const companyFacts = [
+  { k: 'What we build', v: 'Tools for AI agents' },
+  { k: 'Products', v: 'Uniro · PaperMentor' },
+  { k: 'What we tackle', v: 'Cost · Latency · Reliability' },
+  { k: 'Stage', v: 'Working with early teams' },
+];
 ---
 <BaseLayout>
   <Nav />
   <main>
-    <Hero />
+    <HomeHero />
     <TrustMarquee />
     <StatsBand />
-    <Features />
-    <HowItWorks />
-    <About />
-    <CTA />
+    <ProductsShowcase />
+    <HowItWorks
+      eyebrow="Our approach"
+      title="How TKM-AI takes agents to scale"
+      intro="One backbone — optimize, deploy, observe — powers every product we build."
+      steps={approachSteps}
+    />
+    <About
+      title="Built by engineers obsessed with how agents run"
+      lead="TKM-AI exists to make AI agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. We build focused products for the unglamorous parts: cost, latency, and reliability under real traffic."
+      facts={companyFacts}
+    />
+    <CTA
+      title="Let's build agents the world can rely on"
+      subtitle="Tell us what you're building and we'll point you to the right tool."
+      mailSubject="TKM-AI — hello"
+      mailBody={"Hi TKM-AI team,\n\nI'd like to learn more about what you're building.\n\n"}
+    />
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  // Scroll reveal — add .in to .reveal elements as they enter the viewport.
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-</script>

@@ -1,0 +1,45 @@
+---
+// Company jumbotron — kinetic type on the cream canvas: dot-grid texture, a soft
+// cursor-following glow, and a headline word that cycles through TKM-AI's capabilities.
+---
+<section class="jumbo" id="top">
+  <div class="jumbo-grid-bg" aria-hidden="true"></div>
+  <div class="jumbo-glow" aria-hidden="true"></div>
+  <div class="wrap jumbo-inner">
+    <span class="jumbo-eyebrow">TKM-AI</span>
+    <h1 class="jumbo-title">
+      <span class="jt-static">We make your agents</span>
+      <span class="rotator" aria-label="faster, cheaper, reliable, and production-ready">
+        <span class="rot-word">faster.</span>
+        <span class="rot-word">cheaper.</span>
+        <span class="rot-word">reliable.</span>
+        <span class="rot-word">production&#8209;ready.</span>
+      </span>
+    </h1>
+    <p class="jumbo-sub">The company building the tools that take AI agents from prototype to scale — optimized for cost and performance, observable in production, and ready for real users.</p>
+    <div class="jumbo-actions">
+      <a href="#products" class="btn btn-primary">Explore products <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a href="#contact" class="btn btn-secondary">Talk to us</a>
+    </div>
+    <div class="jumbo-meta">
+      <a href="/uniro" class="jm-item"><b>Uniro</b><span>Agent routing for optimal cost-performance</span></a>
+      <a href="/papermentor" class="jm-item"><b>PaperMentor</b><span>Academic paper review at university scale</span></a>
+    </div>
+  </div>
+  <a href="#products" class="jumbo-scroll" aria-label="Scroll to products">
+    <span></span>
+  </a>
+</section>
+
+<script>
+  // Soft warm glow follows the cursor across the hero (skipped for reduced-motion).
+  const jumbo = document.querySelector('.jumbo') as HTMLElement | null;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (jumbo && !reduce) {
+    jumbo.addEventListener('pointermove', (e) => {
+      const r = jumbo.getBoundingClientRect();
+      jumbo.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+      jumbo.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+    });
+  }
+</script>

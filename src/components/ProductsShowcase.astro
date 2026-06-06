@@ -1,0 +1,59 @@
+---
+// The company homepage centerpiece — the two TKM-AI products, each linking to its page.
+const products = [
+  {
+    name: 'Uniro',
+    href: '/uniro',
+    tagline: 'Agent routing for optimal cost-performance',
+    desc: 'Route every request to the model that gives the best answer for the lowest cost and latency — with automatic failover and live observability built in.',
+    points: ['Cost-aware multi-model routing', 'Automatic failover & caching', 'Tracing and evals out of the box'],
+    visual: 'routing',
+  },
+  {
+    name: 'PaperMentor',
+    href: '/papermentor',
+    tagline: 'Academic paper review at university scale',
+    desc: 'An academic agent that reviews papers, checks citations, and returns structured, rubric-aligned feedback — deployable department-wide to mentor thousands of students at once.',
+    points: ['Structured, rubric-aligned review', 'Citation & integrity checks', 'Scales to every student'],
+    visual: 'review',
+  },
+];
+---
+<section class="section wrap" id="products">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Our products</span>
+    <h2>Two products, one mission: agents you can trust</h2>
+    <p>TKM-AI builds focused tools for the hardest parts of running agents in the real world — from the data center to the lecture hall.</p>
+  </div>
+  <div class="prod-grid">
+    {products.map((p) => (
+      <a class="prod-card reveal" href={p.href}>
+        <div class={`prod-visual prod-${p.visual}`} aria-hidden="true">
+          {p.visual === 'routing' && (
+            <div class="pv-panel">
+              <div class="pv-row"><span class="pv-lab">Baseline</span><div class="pv-track"><i style="width:100%"></i></div></div>
+              <div class="pv-row"><span class="pv-lab pv-hotlab">Uniro</span><div class="pv-track"><i class="pv-hot" style="width:38%"></i></div></div>
+              <div class="pv-chips"><span>GPT-class</span><span>Claude</span><span>open models</span></div>
+            </div>
+          )}
+          {p.visual === 'review' && (
+            <div class="pv-panel pv-paper">
+              <span class="pv-line"></span>
+              <span class="pv-line"></span>
+              <span class="pv-line pv-mark"></span>
+              <span class="pv-line short"></span>
+              <div class="pv-tags"><span class="ok">✓ citations</span><span class="warn">⚠ 1 claim</span><span>rubric B+</span></div>
+            </div>
+          )}
+        </div>
+        <div class="prod-body">
+          <h3>{p.name}</h3>
+          <p class="prod-tag">{p.tagline}</p>
+          <p class="prod-desc">{p.desc}</p>
+          <ul class="prod-points">{p.points.map((pt) => <li>{pt}</li>)}</ul>
+          <span class="prod-more">Explore {p.name} <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

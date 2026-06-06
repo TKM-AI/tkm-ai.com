@@ -1,9 +1,12 @@
 ---
-const stats = [
+interface Stat { num: string; desc: string; }
+interface Props { stats?: Stat[]; }
+const DEFAULTS: Stat[] = [
   { num: 'Cost', desc: 'Prompt compression, caching, and token trimming reduce <b>spend</b> without sacrificing quality.' },
   { num: 'Speed', desc: 'Adaptive routing sends each request to the fastest <b>model</b> that can handle it.' },
   { num: 'Scale', desc: 'Autoscaling infrastructure with tracing, evals, and automatic <b>failover</b>.' },
 ];
+const { stats = DEFAULTS } = Astro.props;
 ---
 <section class="stats reveal">
   <div class="wrap">

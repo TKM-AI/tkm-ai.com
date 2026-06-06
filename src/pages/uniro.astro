@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import ProductHero from '../components/ProductHero.astro';
+import SavingsChart from '../components/SavingsChart.astro';
+import TrustMarquee from '../components/TrustMarquee.astro';
+import StatsBand from '../components/StatsBand.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import About from '../components/About.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const uniroFacts = [
+  { k: 'Product', v: 'Uniro — agent routing' },
+  { k: 'Optimizes for', v: 'Cost · Latency · Quality' },
+  { k: 'Models', v: 'Multi-provider, model-agnostic' },
+  { k: 'Deployment', v: 'Autoscaling infrastructure' },
+];
+---
+<BaseLayout
+  title="Uniro — Agent routing for optimal cost-performance | TKM-AI"
+  description="Uniro routes every request to the model that delivers the best answer for the lowest cost and latency — with automatic failover, caching, and live observability."
+  path="/uniro"
+>
+  <Nav />
+  <main>
+    <ProductHero
+      tag="ROUTING"
+      pill="Uniro · agent routing"
+      title="Route every request to the"
+      titleAccent="optimal model."
+      sub="Uniro sends each call to the model that gives the best answer for the lowest cost and latency — with automatic failover, aggressive caching, and observability built in. Keep your quality; cut your bill."
+      primaryHref="#contact"
+      primaryLabel="Get in touch"
+      secondaryHref="#how"
+      secondaryLabel="See how it works"
+      note="Works with the agents and models you already use"
+    >
+      <SavingsChart />
+    </ProductHero>
+
+    <TrustMarquee title="Routes across every major model & agent" />
+    <StatsBand />
+    <Features
+      eyebrow="The platform"
+      title="Everything you need to route agents in production"
+      intro="Uniro turns a pile of model calls into a cost-aware, observable, production-grade routing layer."
+    />
+    <HowItWorks />
+    <About
+      title="Built for teams that run agents at scale"
+      lead="Uniro exists to make LLM agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. It focuses on the unglamorous parts: latency, cost, and reliability under real traffic."
+      facts={uniroFacts}
+    />
+    <CTA
+      title="Let's make your agents cheaper and faster"
+      subtitle="Tell us about your agents and we'll show you where the wins are."
+      mailSubject="TKM-AI — interested in Uniro"
+      mailBody={"Hi TKM-AI team,\n\nI'd like to learn more about routing and optimizing my agents with Uniro.\n\n"}
+    />
+  </main>
+  <Footer />
+</BaseLayout>

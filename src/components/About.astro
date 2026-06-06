@@ -1,23 +1,39 @@
 ---
-const facts = [
+interface Fact { k: string; v: string; }
+interface Value { title: string; desc: string; }
+interface Props {
+  id?: string; eyebrow?: string; title?: string; lead?: string;
+  facts?: Fact[]; values?: Value[];
+}
+
+const DEFAULT_FACTS: Fact[] = [
   { k: 'Focus', v: 'LLM agent optimization' },
   { k: 'What we tackle', v: 'Cost · Latency · Reliability' },
   { k: 'Deployment', v: 'Autoscaling infrastructure' },
   { k: 'Stage', v: 'Working with early teams' },
 ];
-const values = [
+const DEFAULT_VALUES: Value[] = [
   { title: 'Cost-aware by default', desc: 'Every optimization is measured against quality, not just price — so you never trade accuracy for a lower bill.' },
   { title: 'Production-first', desc: 'Tracing, evaluations, and automatic failover are built in from day one, not bolted on later.' },
   { title: 'Model-agnostic', desc: "Route across providers and models. You're never locked into a single vendor." },
   { title: 'Developer-friendly', desc: 'A drop-in SDK and clean APIs that fit the stack and workflow you already have.' },
 ];
+
+const {
+  id = 'about',
+  eyebrow = 'About us',
+  title = 'Built by engineers obsessed with agent performance',
+  lead = 'TKM-AI exists to make LLM-based agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. We focus on the unglamorous parts: latency, cost, and reliability under real traffic.',
+  facts = DEFAULT_FACTS,
+  values = DEFAULT_VALUES,
+} = Astro.props;
 ---
-<section class="section wrap" id="about">
+<section class="section wrap" id={id}>
   <div class="about-grid">
     <div class="reveal">
-      <span class="eyebrow">About us</span>
-      <h2>Built by engineers obsessed with agent performance</h2>
-      <p class="about-lead">TKM-AI exists to make LLM-based agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. We focus on the unglamorous parts: latency, cost, and reliability under real traffic.</p>
+      <span class="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p class="about-lead">{lead}</p>
       <div class="about-card">
         {facts.map((f) => (
           <div class="row"><span>{f.k}</span><span>{f.v}</span></div>
