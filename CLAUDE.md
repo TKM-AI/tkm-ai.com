@@ -46,7 +46,7 @@ There is **no unit-test framework** (by design). "Verifying a change" = `npm run
 
 **Two ways to deploy:**
 - **Manual:** `npm run build` then `npx wrangler pages deploy dist --project-name tkm-ai --branch main` (`--branch main` marks it production).
-- **Push-to-deploy:** `.github/workflows/deploy.yml` runs `npm ci → npm run build → wrangler pages deploy` on every push to `main`. Requires repo secret **`CLOUDFLARE_API_TOKEN`** (scope: Account → Cloudflare Pages → Edit; account ID is hardcoded in the workflow). The Pages project is **Direct Upload, NOT Git-connected** — a plain `git push` deploys *only because of this workflow*, there is no Cloudflare-side auto-build.
+- **Push-to-deploy (`.github/workflows/deploy.yml`):** runs `npm ci → npm run build → wrangler pages deploy` on every push to `main`. ⚠️ **As of 2026-06-06 this is NOT working** — the repo secret **`CLOUDFLARE_API_TOKEN`** is unset, so every run fails with *"necessary to set a CLOUDFLARE_API_TOKEN"* (verify: `gh run list`). **Manual `wrangler pages deploy` is the path that actually keeps the site live.** A silver lining: since CI never deploys, a `git push` can't overwrite production with stale code. To make CI work, create a Cloudflare API token (Account → Cloudflare Pages → Edit) and `gh secret set CLOUDFLARE_API_TOKEN --repo TKM-AI/tkm-ai.com`. The Pages project is **Direct Upload, NOT Git-connected** — there is no Cloudflare-side auto-build.
 
 **Auth:** `wrangler` needs `wrangler login` (OAuth, persisted to disk, shared by any shell on this box) **or** `CLOUDFLARE_API_TOKEN`. The user keeps the **Cloudflare MCP** connected; **minting a standing API token via the API/MCP is auto-denied by the harness** — use `wrangler login` for the file upload, and the MCP for everything else.
 
