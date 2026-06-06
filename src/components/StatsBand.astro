@@ -1,0 +1,19 @@
+---
+const stats = [
+  { num: 'Cost', desc: 'Prompt compression, caching, and token trimming reduce <b>spend</b> without sacrificing quality.' },
+  { num: 'Speed', desc: 'Adaptive routing sends each request to the fastest <b>model</b> that can handle it.' },
+  { num: 'Scale', desc: 'Autoscaling infrastructure with tracing, evals, and automatic <b>failover</b>.' },
+];
+---
+<section class="stats reveal">
+  <div class="wrap">
+    <div class="stats-grid">
+      {stats.map((s) => (
+        <div class="stat">
+          <div class="num">{s.num}</div>
+          <div class="desc" set:html={s.desc} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

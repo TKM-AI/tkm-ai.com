@@ -1,0 +1,24 @@
+---
+const logos = [
+  { src: '/assets/logos/claude.png', alt: 'Claude Code', name: 'Claude Code' },
+  { src: '/assets/logos/codex.png', alt: 'Codex', name: 'Codex' },
+  { src: '/assets/logos/cursor.png', alt: 'Cursor', name: 'Cursor' },
+  { src: '/assets/logos/antigravity.png', alt: 'Antigravity', name: 'Antigravity' },
+  { src: '/assets/logos/deepseek.png', alt: 'DeepSeek', name: 'DeepSeek' },
+  { src: '/assets/logos/gemini-cli.png', alt: 'Gemini CLI', name: 'Gemini CLI' },
+  { src: '/assets/logos/openclaw.png', alt: 'OpenClaw', name: 'OpenClaw' },
+  { src: '/assets/logos/copilot.png', alt: 'Copilot', name: 'Copilot' },
+];
+// Rendered twice so the -50% translate loops seamlessly — but there's ONE source list.
+const doubled = [...logos, ...logos];
+---
+<section class="trust">
+  <p class="trust-title">Support all agents</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      {doubled.map((l) => (
+        <div class="logo-item"><img src={l.src} alt={l.alt} width="54" height="54" /><span>{l.name}</span></div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+const links = [
+  { href: '/#product', label: 'Product' },
+  { href: '/#how', label: 'How it works' },
+  { href: '/#about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/"><span class="mark"></span>TKM-AI</a>
+    <nav class="nav-links">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="nav-cta">
+      <a href="/#contact" class="btn btn-primary">Get in touch</a>
+    </div>
+  </div>
+</header>

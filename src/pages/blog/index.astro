@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Blog — TKM-AI" description="Notes on optimizing, deploying, and observing LLM agents in production." path="/blog">
+  <Nav />
+  <main>
+    <div class="blog-wrap">
+      <div class="blog-head">
+        <span class="eyebrow">Blog</span>
+        <h1>Notes on running agents in production</h1>
+      </div>
+      <div class="blog-list">
+        {posts.map((post) => (
+          <a class="post-row" href={`/blog/${post.id}`}>
+            <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+            <span class="more">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

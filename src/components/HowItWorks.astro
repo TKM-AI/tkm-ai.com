@@ -1,0 +1,26 @@
+---
+const steps = [
+  { n: '01', title: 'Connect your agent', desc: 'Wrap your existing LLM calls with our SDK, or import from LangChain and LlamaIndex in a few lines.' },
+  { n: '02', title: 'Optimize automatically', desc: 'TKM-AI profiles every run, then compresses, caches, and routes to keep quality up and cost down.' },
+  { n: '03', title: 'Deploy & monitor', desc: 'Ship to autoscaling infra with one command and watch traces, costs, and evals in real time.' },
+];
+---
+<section class="section wrap" id="how">
+  <div class="how reveal">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>From prototype to production in three steps</h2>
+      <p>Bring the agent you already have. We handle the rest of the path to scale.</p>
+    </div>
+    <div class="how-steps">
+      {steps.map((s) => (
+        <div class="how-step">
+          <span class="n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+          <div class="line"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import TrustMarquee from '../components/TrustMarquee.astro';
+import StatsBand from '../components/StatsBand.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import About from '../components/About.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout>
+  <Nav />
+  <main>
+    <Hero />
+    <TrustMarquee />
+    <StatsBand />
+    <Features />
+    <HowItWorks />
+    <About />
+    <CTA />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Scroll reveal — add .in to .reveal elements as they enter the viewport.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>

@@ -1,0 +1,119 @@
+---
+// Savings chart — re-skinned onto a dark product surface (styling in global.css).
+// Numbers are ILLUSTRATIVE (see .rnote), not measured benchmarks.
+---
+<div class="rchart" id="rchart">
+  <div class="rchart-body">
+    <div class="seg" role="tablist" aria-label="Workload">
+      <button role="tab" aria-selected="true" data-work="chat">Chat</button>
+      <button role="tab" aria-selected="false" data-work="rag">RAG</button>
+      <button role="tab" aria-selected="false" data-work="agents">Agents</button>
+    </div>
+
+    <div class="rgroup">
+      <div class="glabel"><span class="lab">Monthly cost</span><span class="chip" data-chip="cost">&#8595; 68%</span></div>
+      <div class="rrow base"><span class="name">Baseline</span><div class="rtrack"><div class="rfill base" data-fill="costBase"></div></div><span class="val" data-val="costBase">$4,200</span></div>
+      <div class="rrow tkm"><span class="name">TKM-AI</span><div class="rtrack"><div class="rfill tkm" data-fill="costTkm"></div></div><span class="val" data-val="costTkm">$1,340</span></div>
+    </div>
+
+    <div class="rgroup">
+      <div class="glabel"><span class="lab">p50 latency</span><span class="chip" data-chip="lat">3.3&#215; faster</span></div>
+      <div class="rrow base"><span class="name">Baseline</span><div class="rtrack"><div class="rfill base" data-fill="latBase"></div></div><span class="val" data-val="latBase">1,180 ms</span></div>
+      <div class="rrow tkm"><span class="name">TKM-AI</span><div class="rtrack"><div class="rfill tkm" data-fill="latTkm"></div></div><span class="val" data-val="latTkm">360 ms</span></div>
+    </div>
+
+    <div class="rvol">
+      <div class="vhead"><span class="lab">Requests / month</span><span class="num" data-val="vol">1.0M</span></div>
+      <input type="range" min="1" max="100" value="10" aria-label="Monthly request volume" id="rvolRange" />
+      <div class="rsave"><b data-val="save">$2,860</b> saved / month</div>
+    </div>
+    <p class="rnote">Illustrative estimate based on typical workloads — your numbers will vary.</p>
+  </div>
+</div>
+
+<script>
+  // Bars animate via transform:scaleX (width:100% resolves to 0 inside the flex track).
+  // Entrance fires via setTimeout, not requestAnimationFrame (rAF is throttled offscreen).
+  const root = document.getElementById('rchart');
+  if (root) {
+    const WORK: Record<string, { baseC: number; tkmC: number; baseL: number; tkmL: number }> = {
+      chat: { baseC: 4200, tkmC: 1340, baseL: 1180, tkmL: 360 },
+      rag: { baseC: 6800, tkmC: 2450, baseL: 1640, tkmL: 520 },
+      agents: { baseC: 11500, tkmC: 3900, baseL: 2950, tkmL: 880 },
+    };
+    let cur = 'chat';
+    let volM = 1.0;
+    let started = false;
+
+    const q = (s: string) => root.querySelector(s) as HTMLElement;
+    const fills = {
+      costBase: q('[data-fill=costBase]'), costTkm: q('[data-fill=costTkm]'),
+      latBase: q('[data-fill=latBase]'), latTkm: q('[data-fill=latTkm]'),
+    };
+    const vals = {
+      costBase: q('[data-val=costBase]'), costTkm: q('[data-val=costTkm]'),
+      latBase: q('[data-val=latBase]'), latTkm: q('[data-val=latTkm]'),
+      save: q('[data-val=save]'), vol: q('[data-val=vol]'),
+    };
+    const chips = { cost: q('[data-chip=cost]'), lat: q('[data-chip=lat]') };
+    const buttons = Array.from(root.querySelectorAll('.seg button')) as HTMLButtonElement[];
+    const range = root.querySelector('#rvolRange') as HTMLInputElement;
+
+    const money = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+    const ms = (n: number) => Math.round(n).toLocaleString('en-US') + ' ms';
+
+    function tween(el: HTMLElement, to: number, fmt: (n: number) => string) {
+      const from = parseFloat(el.dataset.n || '0');
+      el.dataset.n = String(to);
+      const t0 = performance.now();
+      const dur = 620;
+      let done = false;
+      const finish = () => { if (!done) { done = true; el.textContent = fmt(to); } };
+      (function step(t: number) {
+        const k = Math.min(1, (t - t0) / dur);
+        const e = 1 - Math.pow(1 - k, 3);
+        if (k >= 1) { finish(); return; }
+        el.textContent = fmt(from + (to - from) * e);
+        requestAnimationFrame(step);
+      })(performance.now());
+      setTimeout(finish, dur + 80);
+    }
+    function setNow(el: HTMLElement, to: number, fmt: (n: number) => string) {
+      el.dataset.n = String(to);
+      el.textContent = fmt(to);
+    }
+
+    function render(animate: boolean) {
+      const d = WORK[cur];
+      const cb = d.baseC * volM, ct = d.tkmC * volM, saved = cb - ct;
+      fills.costBase.style.transform = 'scaleX(1)';
+      fills.costTkm.style.transform = 'scaleX(' + d.tkmC / d.baseC + ')';
+      fills.latBase.style.transform = 'scaleX(1)';
+      fills.latTkm.style.transform = 'scaleX(' + d.tkmL / d.baseL + ')';
+      const put = animate ? tween : setNow;
+      put(vals.costBase, cb, money);
+      put(vals.costTkm, ct, money);
+      put(vals.save, saved, money);
+      if (animate) { tween(vals.latBase, d.baseL, ms); tween(vals.latTkm, d.tkmL, ms); }
+      else { setNow(vals.latBase, d.baseL, ms); setNow(vals.latTkm, d.tkmL, ms); }
+      vals.vol.textContent = volM.toFixed(1) + 'M';
+      chips.cost.innerHTML = '&#8595; ' + Math.round((1 - d.tkmC / d.baseC) * 100) + '%';
+      chips.lat.innerHTML = (d.baseL / d.tkmL).toFixed(1) + '&#215; faster';
+    }
+
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      if (b.dataset.work === cur) return;
+      buttons.forEach((x) => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+      cur = b.dataset.work as string;
+      render(true);
+    }));
+    range.addEventListener('input', () => { volM = +range.value / 10; render(false); });
+
+    const start = () => { if (started) return; started = true; render(true); };
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', () => setTimeout(start, 60));
+    } else {
+      setTimeout(start, 60);
+    }
+  }
+</script>

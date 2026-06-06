@@ -1,0 +1,36 @@
+---
+const product = [
+  { href: '/#product', label: 'Optimization' },
+  { href: '/#product', label: 'Deployment' },
+  { href: '/#product', label: 'Observability' },
+  { href: '/#product', label: 'Routing' },
+];
+const company = [
+  { href: '/#about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#contact', label: 'Contact' },
+  { href: 'mailto:hello@tkm-ai.com', label: 'Email us' },
+];
+---
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="/"><span class="mark"></span>TKM-AI</a>
+        <p>The platform to optimize, deploy, and observe LLM-based agents in production.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        {product.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        {company.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 TKM-AI</span>
+      <span>tkm-ai.com</span>
+    </div>
+  </div>
+</footer>
