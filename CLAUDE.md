@@ -36,8 +36,25 @@ There is **no unit-test framework** (by design). "Verifying a change" = `npm run
 - **Blog** lives in `src/content/blog/*.md`, typed by `src/content.config.ts` (zod schema: `title`, `description`, `pubDate`, `draft`, `tags`). `/blog` lists non-draft posts; `/blog/[...slug]` renders one. Markdown only for now (MDX not wired up).
 - **Content is deliberately genericized-honest.** No invented people, precise stats, pricing, or "sign in" language implying a shipped product — keep claims aspirational/illustrative.
 
-## Deployment / DNS (operational notes)
+## Deployment / CI / DNS (operational handoff)
 
-- Hosted on **Cloudflare Pages**, project `tkm-ai`, build `npm run build`, output `dist`. Deploy via Wrangler direct upload (above) or connect the GitHub repo in the Pages dashboard for auto-builds on push to `main`.
-- **DNS is on Cloudflare.** The custom domain `tkm-ai.com` is attached to the Pages project (Pages → Custom domains), which manages the apex record. The old GitHub Pages `A`/`AAAA` records and the repo's `CNAME`/`.nojekyll` files have been retired.
-- DNS-only (grey cloud) is fine; if you enable Cloudflare's proxy (orange cloud), use SSL/TLS mode **"Full"**.
+**Hosting:** Cloudflare Pages, project `tkm-ai` → `tkm-ai.pages.dev`. Production = the `main`-branch deploy, live at https://tkm-ai.com (TLS auto-managed by Cloudflare / Google Trust Services). **GitHub Pages is disabled — do not re-enable.** It errored on every push once the static `index.html` was removed; it was deleted via `gh api -X DELETE repos/TKM-AI/tkm-ai.com/pages` (a `GET …/pages` should 404).
+
+**Identifiers (not secrets — safe here, still need auth to use):** CF account `6f3c9ca99d20c819d9d4288f95fc4b96` (Lekhang4497@gmail.com); `tkm-ai.com` zone `cbfe7c6b0c59bf8ff9215e4c62c7cf95`.
+
+**Two ways to deploy:**
+- **Manual:** `npm run build` then `npx wrangler pages deploy dist --project-name tkm-ai --branch main` (`--branch main` marks it production).
+- **Push-to-deploy:** `.github/workflows/deploy.yml` runs `npm ci → npm run build → wrangler pages deploy` on every push to `main`. Requires repo secret **`CLOUDFLARE_API_TOKEN`** (scope: Account → Cloudflare Pages → Edit; account ID is hardcoded in the workflow). The Pages project is **Direct Upload, NOT Git-connected** — a plain `git push` deploys *only because of this workflow*, there is no Cloudflare-side auto-build.
+
+**Auth:** `wrangler` needs `wrangler login` (OAuth, persisted to disk, shared by any shell on this box) **or** `CLOUDFLARE_API_TOKEN`. The user keeps the **Cloudflare MCP** connected; **minting a standing API token via the API/MCP is auto-denied by the harness** — use `wrangler login` for the file upload, and the MCP for everything else.
+
+**Cloudflare MCP — preferred for DNS/Pages/domain ops:** `cloudflare-api__execute` runs JS with `cloudflare.request({method,path,body})` and a pre-set `accountId`; `cloudflare-api__search` searches the API spec (search first, then execute). Used this session for project-create, custom-domain attach, and the DNS cutover.
+
+**DNS (Cloudflare zone — manage via MCP):** apex `tkm-ai.com` + `www` are `CNAME → tkm-ai.pages.dev`, **proxied (orange cloud)** — correct for Pages, do **not** switch to grey/DNS-only. `_domainconnect` CNAME + `_dmarc` TXT are registrar/email records — leave them. The old GitHub-Pages apex `A` (185.199.108–111.153) + `AAAA` (2606:50c0:8000–8003::153) records were deleted during cutover. Custom domains live on the Pages project (`…/pages/projects/tkm-ai/domains`).
+
+**Gotchas:**
+- After any DNS/domain change, Pages custom-domain activation takes a few minutes → expect HTTP **522** until routing + cert are ready.
+- The local resolver caches stale records (showed `NXDOMAIN` mid-cutover). Verify globally: `dig @1.1.1.1 tkm-ai.com` or `curl --resolve tkm-ai.com:443:172.67.158.126 https://tkm-ai.com`.
+- Pushing `.github/workflows/*` needs the `gh` token to have **`workflow`** scope.
+
+**Verify a deploy:** `curl -sI https://tkm-ai.com` (expect 200) · `gh run list --repo TKM-AI/tkm-ai.com` · the Astro rebuild merged from `astro-migration` into `main` (the deploy source); `dist/`, `node_modules/`, `.astro/` are gitignored.
