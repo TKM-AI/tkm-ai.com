@@ -1,20 +1,54 @@
 ---
-// Shared top nav across the company home + product pages.
-// Links point at real routes; the "Get in touch" CTA scrolls to the current page's #contact band.
-const links = [
-  { href: '/uniro', label: 'Uniro' },
-  { href: '/papermentor', label: 'PaperMentor' },
-  { href: '/blog', label: 'Blog' },
+import Brand from './Brand.astro';
+// "Product" opens a dropdown of the products; the list is data-driven so adding a third is trivial.
+const productLinks = [
+  { href: '/uniro', label: 'Uniro', desc: 'Agent routing for optimal cost-performance' },
+  { href: '/papermentor', label: 'PaperMentor', desc: 'Academic paper review at university scale' },
 ];
 ---
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="/"><span class="mark"></span>TKM-AI</a>
-    <nav class="nav-links">
-      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <Brand />
+    <nav class="nav-links" aria-label="Primary">
+      <div class="nav-item has-dd">
+        <button type="button" class="nav-trigger" aria-haspopup="true" aria-expanded="false">
+          Product
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="dd">
+          {productLinks.map((p) => (
+            <a class="dd-item" href={p.href}>
+              <span class="dd-name">{p.label}</span>
+              <span class="dd-desc">{p.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <a href="/#about">About us</a>
+      <a href="/blog">Blog</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="nav-cta">
       <a href="#contact" class="btn btn-primary">Get in touch</a>
     </div>
   </div>
 </header>
+
+<script>
+  // Product dropdown: open on hover, focus, or click; keep aria-expanded in sync; Esc closes.
+  document.querySelectorAll<HTMLElement>('.nav-item.has-dd').forEach((item) => {
+    const trigger = item.querySelector('.nav-trigger');
+    const set = (open: boolean) => {
+      item.classList.toggle('open', open);
+      trigger?.setAttribute('aria-expanded', String(open));
+    };
+    item.addEventListener('mouseenter', () => set(true));
+    item.addEventListener('mouseleave', () => set(false));
+    trigger?.addEventListener('click', (e) => { e.preventDefault(); set(!item.classList.contains('open')); });
+    item.addEventListener('focusin', () => set(true));
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains((e as FocusEvent).relatedTarget as Node)) set(false);
+    });
+    document.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Escape') set(false); });
+  });
+</script>

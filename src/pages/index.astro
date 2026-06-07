@@ -17,10 +17,16 @@ const approachSteps = [
 ];
 
 const companyFacts = [
+  { k: 'Team', v: 'Researchers & engineers' },
   { k: 'What we build', v: 'Tools for AI agents' },
   { k: 'Products', v: 'Uniro · PaperMentor' },
   { k: 'What we tackle', v: 'Cost · Latency · Reliability' },
-  { k: 'Stage', v: 'Working with early teams' },
+];
+const companyValues = [
+  { title: 'Research-driven', desc: 'Our team advances the methods behind efficient, reliable agents — research rigor, shipped into products.' },
+  { title: 'Cost-aware by default', desc: 'Every optimization is measured against quality, not just price — so you never trade accuracy for a lower bill.' },
+  { title: 'Production-first', desc: 'Tracing, evaluations, and automatic failover are built in from day one, not bolted on later.' },
+  { title: 'Model-agnostic', desc: "Route across providers and models — you're never locked into a single vendor." },
 ];
 ---
 <BaseLayout>
@@ -37,9 +43,10 @@ const companyFacts = [
       steps={approachSteps}
     />
     <About
-      title="Built by engineers obsessed with how agents run"
-      lead="TKM-AI exists to make AI agents cheaper, faster, and more reliable to run — so teams can move from prototype to production with confidence. We build focused products for the unglamorous parts: cost, latency, and reliability under real traffic."
+      title="Built by researchers and engineers obsessed with how agents run"
+      lead="TKM-AI brings together researchers and engineers — people advancing the techniques behind efficient, reliable agents, not just wiring up what already exists. We pair frontier research with production engineering so AI agents are cheaper, faster, and more dependable to run, from prototype to scale."
       facts={companyFacts}
+      values={companyValues}
     />
     <CTA
       title="Let's build agents the world can rely on"

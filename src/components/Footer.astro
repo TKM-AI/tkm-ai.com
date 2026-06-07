@@ -1,10 +1,11 @@
 ---
+import Brand from './Brand.astro';
 const products = [
   { href: '/uniro', label: 'Uniro' },
   { href: '/papermentor', label: 'PaperMentor' },
 ];
 const company = [
-  { href: '/', label: 'Home' },
+  { href: '/#about', label: 'About us' },
   { href: '/blog', label: 'Blog' },
   { href: '#contact', label: 'Contact' },
   { href: 'mailto:hello@tkm-ai.com', label: 'Email us' },
@@ -14,7 +15,7 @@ const company = [
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a class="brand" href="/"><span class="mark"></span>TKM-AI</a>
+        <Brand />
         <p>The company building the tools that take AI agents from prototype to scale — optimized, deployed, and observed.</p>
       </div>
       <div class="foot-col">
