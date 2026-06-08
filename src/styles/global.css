@@ -68,8 +68,8 @@ img { display:block; }
 .btn-primary:active { background:var(--primary-active); }
 .btn-secondary { background:var(--canvas); color:var(--ink); border-color:var(--hairline); }
 .btn-secondary:active { border-color:var(--ink); }
-.btn-on-teal { background:var(--canvas); color:var(--ink); }
-.btn-on-teal:active { background:var(--surface-card); }
+.btn-on-ink { background:var(--canvas); color:var(--ink); }
+.btn-on-ink:active { background:var(--surface-card); }
 
 /* Scroll reveal */
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }

@@ -1,6 +1,6 @@
 ## Overview
 
-Claude.com is the warmest, most editorial interface in the AI-product category. The base atmosphere is a **tinted cream canvas** (`{colors.canvas}` — #faf9f5) — distinctly warm, deliberately not the cool gray-white that every other AI brand uses. Headlines run a **geometric-sans display** (**Google Sans**) at weight 600 with negative letter-spacing, paired with **Inter** body sans. The combination reads clean, modern, and confident, while the cream canvas keeps it warm rather than clinical.
+TKM-AI's site is a warm, editorial interface in the AI-product category. The base atmosphere is a **tinted cream canvas** (`{colors.canvas}` — #faf9f5) — distinctly warm, deliberately not the cool gray-white that every other AI brand uses. Headlines run a **geometric-sans display** (**Google Sans**) at weight 600 with negative letter-spacing, paired with **Inter** body sans. The combination reads clean, modern, and confident, while the cream canvas keeps it warm rather than clinical.
 
 Brand voltage comes from the **cream + ink-black pairing** — the accent is **warm ink black** (`{colors.primary}` — #141413), used on every primary CTA, on inline links, and on the full-bleed callout band. On the cream canvas it reads as crisp black-on-warm; on the dark product surfaces it **flips to cream** (`{colors.on-dark}`), because a near-black accent would vanish there. The high-contrast black plus the cream↔dark pacing carry the voltage; the warmth stays in the cream canvas. The accent is deliberately *not* a color (no coral/teal/blue) — the only surviving coral is the small diamond inside the TKM monogram logo.
 
@@ -9,7 +9,7 @@ The system has three surface modes that alternate page-by-page:
 2. **Light cream cards** (`{colors.surface-card}`) — feature card backgrounds
 3. **Warm dark product surfaces** (`{colors.surface-dark}` — #181715, a warm near-black, not navy) — code editor mockups, model showcase cards, pre-footer CTAs, footer itself
 
-The dark surfaces are where Claude shows its product chrome — code blocks, terminal output, model comparison tables, agentic-flow diagrams. The cream-to-dark contrast is the page's pacing rhythm.
+The dark surfaces are where TKM-AI shows its product chrome — the savings chart, the review mockup, code/terminal panels, the dark how-it-works and CTA bands. The cream-to-dark contrast is the page's pacing rhythm.
 
 **Key Characteristics:**
 - Warm cream canvas (`{colors.canvas}` — #faf9f5) with dark warm-ink text (`{colors.ink}` — #141413). The brand's defining color choice.
@@ -17,7 +17,7 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 - Geometric-sans display headlines via Google Sans at weight 600 with negative letter-spacing. Pairs with a humanist sans body (Inter) for a clean, modern, confident voice.
 - Warm dark product mockup cards (`{colors.surface-dark}` — #181715) carrying code blocks, terminal panels, model comparison data — the brand shows the product chrome at scale rather than abstract marketing illustrations.
 - Light cream feature cards (`{colors.surface-card}` — #efe9de) — slightly darker than canvas, used for content-driven feature explanations.
-- Anthropic radial-spike mark — a small black asterisk-like glyph (4-spoke radial) — appears as the brand wordmark prefix and as a content marker.
+- TKM monogram mark — the stylized "TKM" letters with a small coral diamond accent — sits as the brand wordmark prefix (`Brand.astro`); its letters follow `currentColor`.
 - Border radius is hierarchical: `{rounded.md}` (8px) for buttons + inputs, `{rounded.lg}` (12px) for content + product cards, `{rounded.xl}` (16px) for the hero illustration container, `{rounded.pill}` for badges.
 - Section rhythm `{spacing.section}` (96px) — modern-SaaS standard. Internal card padding stays generous at `{spacing.xl}` (32px).
 
@@ -125,7 +125,7 @@ The cream canvas + Google Sans display + generous internal padding create a clea
 The elevation philosophy is **color-block first, shadow rare**. Most depth comes from the cream-vs-dark surface contrast. Shadows are minimal. The dark surface mockups have their own internal product chrome (code editor scrollbars, line numbers, syntax highlighting) which adds detail without needing external shadows.
 
 ### Decorative Depth
-- The Anthropic spike-mark glyph (4-spoke radial asterisk) appears as a small black mark in the brand wordmark and inline as a content marker.
+- The TKM monogram (the "TKM" letters + a small coral diamond) is the brand mark; its letters render in `currentColor` — ink on cream, cream on dark — while the coral diamond stays constant.
 - Code editor mockups carry their own internal depth: syntax-highlighted text in muted blues / oranges / grays, line numbers in `{colors.muted-soft}`, status bars at the bottom in `{colors.surface-dark-elevated}`.
 - Some hero illustrations use simple line-art with ink strokes on cream — minimal, hand-drawn-feeling, never photorealistic.
 
@@ -138,17 +138,17 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 | `{rounded.xs}` | 4px | Reserved for badge accents and tiny dropdowns |
 | `{rounded.sm}` | 6px | Small inline buttons, dropdown items |
 | `{rounded.md}` | 8px | Standard CTA buttons, text inputs, category tabs |
-| `{rounded.lg}` | 12px | Content cards (feature, pricing, code-window, model-comparison) |
-| `{rounded.xl}` | 16px | Hero illustration container, the larger marquee components |
+| `{rounded.lg}` | 12px | Content cards (feature, pricing, code-window) |
+| `{rounded.xl}` | 16px | Hero illustration container, product-showcase cards, the larger marquee components |
 | `{rounded.pill}` | 9999px | Badge pills, "NEW" tags |
 | `{rounded.full}` | 9999px / 50% | Avatar substitutes, icon buttons |
 
 ### Photography & Illustrations
-Claude's hero rarely uses photography. Instead it uses:
+The hero rarely uses photography. Instead it uses:
 - Simple line-art illustrations with ink strokes on the cream canvas
 - Code editor mockups (the dominant "hero" treatment on developer-focused pages)
 - Terminal output mockups with monospace text on dark
-- Model comparison cards (Opus / Sonnet / Haiku) with abstract geometric thumbnails
+- Product-data mockups — the savings chart (Uniro) and the review mockup (PaperMentor) — rendered on dark surfaces
 
 When photography is used (rare — mostly testimonials), avatars crop to perfect circles at 40px diameter.
 
@@ -156,7 +156,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### Top Navigation
 
-**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the Anthropic spike-mark + "Claude" wordmark at left, primary horizontal menu (Product, Solutions, Use Cases, Pricing, Research, Company) center-left, right-side cluster with "Sign in" text-link, "Try Claude" `{component.button-primary}` (ink). Menu items in `{typography.nav-link}` (Inter 14px / 500).
+**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the TKM monogram + "TKM-AI" wordmark at left (`Brand.astro`), the primary menu (Product ▾ → Uniro / PaperMentor, About us, Blog, Contact) center/right, and a "Get in touch" `{component.button-primary}` (ink) at the right. Menu items in `{typography.nav-link}` (Inter 14px / 500). The menu is hidden below 900px (no hamburger yet).
 
 ### Buttons
 
@@ -182,9 +182,9 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`product-mockup-card-dark`** — Warm dark card showing actual product chrome (chat interface, code editor, agent controls). Background `{colors.surface-dark}`, rounded `{rounded.lg}`, internal padding `{spacing.xl}` (32px). Carries text labels in `{colors.on-dark}` and product UI fragments below.
 
-**`code-window-card`** — A specialized dark card showing a code editor with line numbers, syntax-highlighted code in `{typography.code}` (JetBrains Mono), and sometimes a "Run" button or terminal output panel below. Background `{colors.surface-dark}` with `{colors.surface-dark-soft}` for the inner code block, rounded `{rounded.lg}`, padding `{spacing.lg}` (24px). The signature visual element of Claude Code product pages.
+**`code-window-card`** — A specialized dark card showing a code editor with line numbers, syntax-highlighted code in `{typography.code}` (JetBrains Mono), and sometimes a "Run" button or terminal output panel below. Background `{colors.surface-dark}` with `{colors.surface-dark-soft}` for the inner code block, rounded `{rounded.lg}`, padding `{spacing.lg}` (24px). The signature visual element of code-forward product pages.
 
-**`model-comparison-card`** — Used on the homepage's "Which problem are you up against?" section comparing Opus / Sonnet / Haiku. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, internal padding `{spacing.xl}` (32px). Carries the model name, a short capability blurb, and a `{component.text-link}` to learn more.
+**`product-showcase-card`** — Used in the homepage products showcase (Uniro / PaperMentor). Background `{colors.surface-card}` with hairline border, rounded `{rounded.xl}`, internal padding `{spacing.xl}` (32px). Carries a small product visual (dark routing panel / cream review panel), the product name, a tagline, key points, and an "Explore →" link. The list is data-driven — adding a third product is a one-line change.
 
 **`pricing-tier-card`** — Standard tier card. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, padding `{spacing.xl}` (32px). Carries the plan name in `{typography.title-lg}` (Inter), price in `{typography.display-sm}` (Google Sans display!), feature checklist in `{typography.body-md}`, and a `{component.button-primary}` at the bottom.
 
@@ -226,9 +226,9 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 - Anchor every page on the cream canvas. Pure white reads as "any other AI tool"; the warm tint is the brand differentiator.
 - Use Google Sans for every display headline. Pair with Inter body. Negative letter-spacing on display sizes is non-negotiable.
 - Reserve `{colors.primary}` (ink) for primary CTAs, inline links, and the full-bleed `{component.callout-card-ink}` band. Don't scatter the accent onto incidental elements.
-- Use `{component.product-mockup-card-dark}` and `{component.code-window-card}` to show actual Claude product chrome. Don't paint marketing illustrations of code when you can show real code.
+- Use `{component.product-mockup-card-dark}` and `{component.code-window-card}` to show actual product chrome (the savings chart, the review mockup, code/terminal panels). Don't paint marketing illustrations when you can show the real thing.
 - Pair `{component.feature-card}` (cream) with `{component.product-mockup-card-dark}` (warm dark) in alternating bands. The cream-to-dark rhythm is the brand's pacing mechanism.
-- Use the Anthropic spike-mark glyph as the brand wordmark prefix. Never invert the mark to white-on-dark within the wordmark itself.
+- Use the TKM monogram (`Brand.astro`) as the brand mark; its letters follow `currentColor` (ink on cream, cream on dark) and the coral diamond stays constant. Don't recolor the diamond or swap the mark.
 - Apply `{spacing.section}` (96px) between major bands.
 
 ### Don't
@@ -281,9 +281,8 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ## Known Gaps
 
-- Display + body now use **Google Sans** and **Inter** — both free, public Google Fonts (TKM's substitution for Anthropic's licensed Copernicus / StyreneB). The exact stacks are in the typography section.
-- The Anthropic radial-spike-mark is a brand glyph rendered as inline SVG; it's not formalized as a system token here. Treat it as a logo asset.
+- Display + body use **Google Sans** and **Inter** — both free, public Google Fonts. (This system was adapted from an editorial reference built on licensed faces; those are not used here.) The exact stacks are in the typography section.
+- The TKM monogram is the brand logo, rendered as inline SVG in `Brand.astro` (and `favicon.svg`); it's not a color/spacing token. Treat it as a logo asset.
 - Animation and transition timings (chat message reveal, code block typewriter effect on the homepage, agentic-flow diagram animations) are not in scope.
 - Form validation states beyond `{component.text-input-focused}` are not extracted — error / success states would need a sign-up or feedback flow to confirm.
-- The actual Claude product surface (claude.ai chat interface) shares some tokens with the marketing site but adds many product-specific components (chat bubbles, message tools, file upload chips, conversation history sidebar) that are out of scope for this marketing-surface document.
-- The "agent" / "computer use" demo cards on certain pages display animated Claude controlling a browser — the static screenshot doesn't fully capture the animation chrome.
+- TKM-AI's actual product surfaces (the Uniro and PaperMentor apps) will share some tokens with this marketing site but add product-specific components (dashboards, run traces, review threads) that are out of scope for this marketing-surface document.
