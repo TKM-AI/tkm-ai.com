@@ -1,6 +1,6 @@
 ## Overview
 
-Claude.com is the warmest, most editorial interface in the AI-product category. The base atmosphere is a **tinted cream canvas** (`{colors.canvas}` — #faf9f5) — distinctly warm, deliberately not the cool gray-white that every other AI brand uses. Headlines run a **slab-serif display** ("Copernicus" / Tiempos Headline) at weight 400 with negative letter-spacing, paired with **StyreneB / Inter** body sans. The combination feels like a literary publication, not a SaaS marketing page.
+Claude.com is the warmest, most editorial interface in the AI-product category. The base atmosphere is a **tinted cream canvas** (`{colors.canvas}` — #faf9f5) — distinctly warm, deliberately not the cool gray-white that every other AI brand uses. Headlines run a **geometric-sans display** (**Google Sans**) at weight 600 with negative letter-spacing, paired with **Inter** body sans. The combination reads clean, modern, and confident, while the cream canvas keeps it warm rather than clinical.
 
 Brand voltage comes from the **cream + coral pairing** — coral (`{colors.primary}` — #cc785c) is the signature Anthropic accent, used on every primary CTA, on the brand wordmark, and on full-bleed callout cards. The coral is warm, slightly muted, never cyan/blue — a deliberate counter-positioning against OpenAI's cool slate, Google's saturated blue, and Microsoft's corporate cyan.
 
@@ -14,7 +14,7 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 **Key Characteristics:**
 - Warm cream canvas (`{colors.canvas}` — #faf9f5) with dark warm-ink text (`{colors.ink}` — #141413). The brand's defining color choice.
 - Coral primary CTA (`{colors.primary}` — #cc785c). Used scarcely on individual buttons, generously on full-bleed coral callout cards.
-- Slab-serif display headlines via Copernicus / Tiempos Headline at weight 400 with negative letter-spacing. Pairs with humanist sans body for a literary editorial voice.
+- Geometric-sans display headlines via Google Sans at weight 600 with negative letter-spacing. Pairs with a humanist sans body (Inter) for a clean, modern, confident voice.
 - Dark navy product mockup cards (`{colors.surface-dark}` — #181715) carrying code blocks, terminal panels, model comparison data — the brand shows the product chrome at scale rather than abstract marketing illustrations.
 - Light cream feature cards (`{colors.surface-card}` — #efe9de) — slightly darker than canvas, used for content-driven feature explanations.
 - Anthropic radial-spike mark — a small black asterisk-like glyph (4-spoke radial) — appears as the brand wordmark prefix and as a content marker.
@@ -59,25 +59,25 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 ## Typography
 
 ### Font Family
-The system runs **Copernicus** (or **Tiempos Headline** as substitute) as the slab-serif display face for headlines, and **StyreneB** (or **Inter** as substitute) as the humanist sans for body, navigation, and UI labels. **JetBrains Mono** handles code blocks. The fallback stack walks `Tiempos Headline, Garamond, "Times New Roman", serif` for display and `Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` for body.
+The system runs **Google Sans** as the geometric-sans display face for headlines, and **Inter** as the humanist sans for body, navigation, and UI labels. **JetBrains Mono** handles code blocks. Google Sans is a real, loadable Google Fonts family (optical-size axis `opsz 17..18`, weights `400..700`) — no substitute needed. The display fallback stack walks `"Google Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`; body walks `Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`.
 
-The display/body split is editorial:
-- Copernicus serif (weight 400, negative tracking) → h1, h2, h3, hero display
-- StyreneB sans (weight 400-500) → body, navigation, buttons, captions, labels
+The display/body split pairs two sans faces — a geometric brand sans for display against a humanist text sans for body:
+- Google Sans (weight 600, negative tracking) → h1, h2, h3, hero display
+- Inter (weight 400-500) → body, navigation, buttons, captions, labels
 - JetBrains Mono → all code blocks and terminal text
 
 ### Hierarchy
 
 | Token | Size | Weight | Line Height | Letter Spacing | Use |
 |---|---|---|---|---|---|
-| `{typography.display-xl}` | 64px | 400 | 1.05 | -1.5px | Homepage h1 ("Meet your thinking partner") — Copernicus serif |
-| `{typography.display-lg}` | 48px | 400 | 1.1 | -1px | Section heads — Copernicus |
-| `{typography.display-md}` | 36px | 400 | 1.15 | -0.5px | Sub-section heads, model names — Copernicus |
-| `{typography.display-sm}` | 28px | 400 | 1.2 | -0.3px | Pricing tier names, callout headlines — Copernicus |
-| `{typography.title-lg}` | 22px | 500 | 1.3 | 0 | Pricing plan size labels — StyreneB |
+| `{typography.display-xl}` | 64px | 600 | 1.05 | -1.5px | Homepage h1 ("We make your agents…") — Google Sans |
+| `{typography.display-lg}` | 48px | 600 | 1.1 | -1px | Section heads — Google Sans |
+| `{typography.display-md}` | 36px | 600 | 1.15 | -0.5px | Sub-section heads, model names — Google Sans |
+| `{typography.display-sm}` | 28px | 600 | 1.2 | -0.3px | Pricing tier names, callout headlines — Google Sans |
+| `{typography.title-lg}` | 22px | 500 | 1.3 | 0 | Pricing plan size labels — Inter |
 | `{typography.title-md}` | 18px | 500 | 1.4 | 0 | Feature card titles, intro paragraphs |
 | `{typography.title-sm}` | 16px | 500 | 1.4 | 0 | Connector tile titles, list labels |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Default running-text — StyreneB |
+| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Default running-text — Inter |
 | `{typography.body-sm}` | 14px | 400 | 1.55 | 0 | Footer body, fine-print |
 | `{typography.caption}` | 13px | 500 | 1.4 | 0 | Badge labels, captions |
 | `{typography.caption-uppercase}` | 12px | 500 | 1.4 | 1.5px | Category tags, "NEW" badges |
@@ -86,12 +86,12 @@ The display/body split is editorial:
 | `{typography.nav-link}` | 14px | 500 | 1.4 | 0 | Top-nav menu items |
 
 ### Principles
-Display sizes use weight 400 (regular), never bold. Negative letter-spacing (-0.3 to -1.5px) is essential — Copernicus without it reads as off-brand. The serif character is what gives Anthropic its literary, considered voice; switching to a sans-serif display would make Claude feel like every other AI tool.
+Display sizes use Google Sans at weight 600 (semibold) — confident but never heavy; avoid 700+ at large sizes, which reads bombastic. Negative letter-spacing (-0.3 to -1.5px, roughly -0.02 to -0.035em) is essential — Google Sans set loose reads generic. The geometric-sans display gives a clean, modern, product-forward voice; the warmth comes from the cream canvas, not the typeface.
 
-Body type stays at weight 400 for paragraphs, weight 500 for labels and emphasized phrases. The sans body is humanist (StyreneB) — never geometric. Inter is an acceptable substitute because of its similar humanist proportions; Helvetica or Arial would be too neutral and break the warm-editorial feel.
+Body type stays at weight 400 for paragraphs, weight 500 for labels and emphasized phrases. The body face is humanist (Inter) — its looser, more open proportions contrast with the tighter geometry of Google Sans, which is what keeps display and body distinct. The pairing is two sans faces, not a serif/sans split.
 
-### Note on Font Substitutes
-If Copernicus / Tiempos Headline is unavailable, **Cormorant Garamond** at weight 500 with -0.02em letter-spacing is the closest open-source approximation. **EB Garamond** is a fallback. For StyreneB, **Inter** is the closest match — both are humanist sans designed for screen reading. **Söhne** is another close alternative if licensed.
+### Note on Fonts
+Google Sans and Inter are both free, loadable Google Fonts — no substitution needed. They are linked once in `BaseLayout.astro` via a single `css2` request (`family=Google+Sans:opsz,wght@17..18,400..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500`). If Google Sans is ever unavailable, the closest free geometric stand-ins are **DM Sans** or **Poppins**; the display stack already falls back to **Inter**, so headlines stay legible regardless.
 
 ## Layout
 
@@ -110,7 +110,7 @@ If Copernicus / Tiempos Headline is unavailable, **Cormorant Garamond** at weigh
 - **Pricing grid:** 3-up at desktop (Free / Pro / Team / Enterprise often), 1-up at mobile.
 
 ### Whitespace Philosophy
-The cream canvas + serif display + generous internal padding create an editorial pacing — Claude reads like a long-form magazine column rather than a marketing template. Whitespace between bands stays uniform at 96px; whitespace inside cards is generous (32px), letting type breathe.
+The cream canvas + Google Sans display + generous internal padding create a clean, editorial pacing — spacious and considered rather than a cramped marketing template. Whitespace between bands stays uniform at 96px; whitespace inside cards is generous (32px), letting type breathe.
 
 ## Elevation & Depth
 
@@ -156,11 +156,11 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### Top Navigation
 
-**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the Anthropic spike-mark + "Claude" wordmark at left, primary horizontal menu (Product, Solutions, Use Cases, Pricing, Research, Company) center-left, right-side cluster with "Sign in" text-link, "Try Claude" `{component.button-primary}` (coral). Menu items in `{typography.nav-link}` (StyreneB 14px / 500).
+**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the Anthropic spike-mark + "Claude" wordmark at left, primary horizontal menu (Product, Solutions, Use Cases, Pricing, Research, Company) center-left, right-side cluster with "Sign in" text-link, "Try Claude" `{component.button-primary}` (coral). Menu items in `{typography.nav-link}` (Inter 14px / 500).
 
 ### Buttons
 
-**`button-primary`** — The signature coral CTA. Background `{colors.primary}` (#cc785c), text `{colors.on-primary}` (white), type `{typography.button}` (StyreneB 14px / 500), padding 12px × 20px, height 40px, rounded `{rounded.md}` (8px). Active state `button-primary-active` darkens to `{colors.primary-active}` (#a9583e).
+**`button-primary`** — The signature coral CTA. Background `{colors.primary}` (#cc785c), text `{colors.on-primary}` (white), type `{typography.button}` (Inter 14px / 500), padding 12px × 20px, height 40px, rounded `{rounded.md}` (8px). Active state `button-primary-active` darkens to `{colors.primary-active}` (#a9583e).
 
 **`button-secondary`** — Cream button with hairline outline. Background `{colors.canvas}`, text `{colors.ink}`, 1px hairline border, same padding + height + radius as primary.
 
@@ -186,7 +186,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`model-comparison-card`** — Used on the homepage's "Which problem are you up against?" section comparing Opus / Sonnet / Haiku. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, internal padding `{spacing.xl}` (32px). Carries the model name, a short capability blurb, and a `{component.text-link}` to learn more.
 
-**`pricing-tier-card`** — Standard tier card. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, padding `{spacing.xl}` (32px). Carries the plan name in `{typography.title-lg}` (StyreneB), price in `{typography.display-sm}` (Copernicus serif!), feature checklist in `{typography.body-md}`, and a `{component.button-primary}` at the bottom.
+**`pricing-tier-card`** — Standard tier card. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, padding `{spacing.xl}` (32px). Carries the plan name in `{typography.title-lg}` (Inter), price in `{typography.display-sm}` (Google Sans display!), feature checklist in `{typography.body-md}`, and a `{component.button-primary}` at the bottom.
 
 **`pricing-tier-card-featured`** — The featured tier (typically "Pro" or "Team"). Background flips to `{colors.surface-dark}`, text inverts to `{colors.on-dark}`. The dark surface IS the featured-tier signal.
 
@@ -214,7 +214,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### CTA / Footer
 
-**`cta-band-coral`** — A pre-footer "Try Claude" CTA card. Full-width coral fill, white type, rounded `{rounded.lg}`, padding 64px. Carries an h2 in `{typography.display-sm}` (still serif!), a sub-line, and a cream-button CTA.
+**`cta-band-coral`** — A pre-footer "Try Claude" CTA card. Full-width coral fill, white type, rounded `{rounded.lg}`, padding 64px. Carries an h2 in `{typography.display-sm}` (still Google Sans!), a sub-line, and a cream-button CTA.
 
 **`cta-band-dark`** — Alternative pre-footer band on developer-focused pages. Background `{colors.surface-dark}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding 64px. Often pairs with a code-window card.
 
@@ -224,7 +224,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### Do
 - Anchor every page on the cream canvas. Pure white reads as "any other AI tool"; the warm tint is the brand differentiator.
-- Use Copernicus serif for every display headline. Pair with StyreneB sans body. Negative letter-spacing on display sizes is non-negotiable.
+- Use Google Sans for every display headline. Pair with Inter body. Negative letter-spacing on display sizes is non-negotiable.
 - Reserve `{colors.primary}` (coral) for primary CTAs and full-bleed `{component.callout-card-coral}` moments. Don't paint accent moments coral elsewhere.
 - Use `{component.product-mockup-card-dark}` and `{component.code-window-card}` to show actual Claude product chrome. Don't paint marketing illustrations of code when you can show real code.
 - Pair `{component.feature-card}` (cream) with `{component.product-mockup-card-dark}` (navy) in alternating bands. The cream-to-dark rhythm is the brand's pacing mechanism.
@@ -233,10 +233,10 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### Don't
 - Don't use cool grays or pure white for canvas. Cream is the brand.
-- Don't bold serif display weight. Copernicus at 700 reads as bombastic; the system stays at 400.
+- Don't over-weight the display. Google Sans at 700+ reads bombastic at large sizes; the system stays at 600.
 - Don't use cool blue or saturated cyan as a brand accent. The coral is the brand voltage.
 - Don't put coral everywhere. The coral is scarce on individual elements and generous only on full-bleed coral callout cards.
-- Don't use Inter for display headlines. The serif character is the brand voice.
+- Don't use Inter for display headlines — Google Sans is the display face; Inter is body only. Keeping the two sans faces distinct is the brand voice.
 - Don't repeat the same surface mode in two consecutive bands. The pacing alternates: cream → cream-card → dark-mockup → cream → coral-callout → dark-footer.
 - Don't add hover state styling beyond what the system already encodes — primary darkens on press; nothing else changes.
 
@@ -275,13 +275,13 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 2. Variants of an existing component (`-active`, `-disabled`, `-focused`) live as separate entries in `components:`.
 3. Use `{token.refs}` everywhere — never inline hex.
 4. Never document hover. Default and Active/Pressed states only.
-5. Display headlines stay Copernicus serif 400 with negative tracking. Body stays StyreneB / Inter 400. The split is unbreakable.
+5. Display headlines stay Google Sans 600 with negative tracking. Body stays Inter 400. The display/body split is unbreakable.
 6. Cream + coral + dark navy is the trinity. Don't introduce a fourth surface tone (no purple cards, no green sections).
-7. When in doubt about emphasis: bigger Copernicus serif before bolder weight.
+7. When in doubt about emphasis: bigger Google Sans before bolder weight.
 
 ## Known Gaps
 
-- Copernicus and StyreneB are licensed Anthropic typefaces and not available as public web fonts. Substitutes (Tiempos Headline / Cormorant Garamond / EB Garamond for serif; Inter / Söhne for sans) are documented in the typography section.
+- Display + body now use **Google Sans** and **Inter** — both free, public Google Fonts (TKM's substitution for Anthropic's licensed Copernicus / StyreneB). The exact stacks are in the typography section.
 - The Anthropic radial-spike-mark is a brand glyph rendered as inline SVG; it's not formalized as a system token here. Treat it as a logo asset.
 - Animation and transition timings (chat message reveal, code block typewriter effect on the homepage, agentic-flow diagram animations) are not in scope.
 - Form validation states beyond `{component.text-input-focused}` are not extracted — error / success states would need a sign-up or feedback flow to confirm.
