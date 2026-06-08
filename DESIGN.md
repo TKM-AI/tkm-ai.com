@@ -2,20 +2,20 @@
 
 Claude.com is the warmest, most editorial interface in the AI-product category. The base atmosphere is a **tinted cream canvas** (`{colors.canvas}` — #faf9f5) — distinctly warm, deliberately not the cool gray-white that every other AI brand uses. Headlines run a **geometric-sans display** (**Google Sans**) at weight 600 with negative letter-spacing, paired with **Inter** body sans. The combination reads clean, modern, and confident, while the cream canvas keeps it warm rather than clinical.
 
-Brand voltage comes from the **cream + coral pairing** — coral (`{colors.primary}` — #cc785c) is the signature Anthropic accent, used on every primary CTA, on the brand wordmark, and on full-bleed callout cards. The coral is warm, slightly muted, never cyan/blue — a deliberate counter-positioning against OpenAI's cool slate, Google's saturated blue, and Microsoft's corporate cyan.
+Brand voltage comes from the **cream + ink-black pairing** — the accent is **warm ink black** (`{colors.primary}` — #141413), used on every primary CTA, on inline links, and on the full-bleed callout band. On the cream canvas it reads as crisp black-on-warm; on the dark product surfaces it **flips to cream** (`{colors.on-dark}`), because a near-black accent would vanish there. The high-contrast black plus the cream↔dark pacing carry the voltage; the warmth stays in the cream canvas. The accent is deliberately *not* a color (no coral/teal/blue) — the only surviving coral is the small diamond inside the TKM monogram logo.
 
 The system has three surface modes that alternate page-by-page:
 1. **Cream canvas** (`{colors.canvas}`) — default body floor
 2. **Light cream cards** (`{colors.surface-card}`) — feature card backgrounds
-3. **Dark navy product surfaces** (`{colors.surface-dark}`) — code editor mockups, model showcase cards, pre-footer CTAs, footer itself
+3. **Warm dark product surfaces** (`{colors.surface-dark}` — #181715, a warm near-black, not navy) — code editor mockups, model showcase cards, pre-footer CTAs, footer itself
 
 The dark surfaces are where Claude shows its product chrome — code blocks, terminal output, model comparison tables, agentic-flow diagrams. The cream-to-dark contrast is the page's pacing rhythm.
 
 **Key Characteristics:**
 - Warm cream canvas (`{colors.canvas}` — #faf9f5) with dark warm-ink text (`{colors.ink}` — #141413). The brand's defining color choice.
-- Coral primary CTA (`{colors.primary}` — #cc785c). Used scarcely on individual buttons, generously on full-bleed coral callout cards.
+- Ink-black primary CTA (`{colors.primary}` — #141413). Buttons, inline links, and the full-bleed callout band; flips to cream (`{colors.on-dark}`) on dark surfaces.
 - Geometric-sans display headlines via Google Sans at weight 600 with negative letter-spacing. Pairs with a humanist sans body (Inter) for a clean, modern, confident voice.
-- Dark navy product mockup cards (`{colors.surface-dark}` — #181715) carrying code blocks, terminal panels, model comparison data — the brand shows the product chrome at scale rather than abstract marketing illustrations.
+- Warm dark product mockup cards (`{colors.surface-dark}` — #181715) carrying code blocks, terminal panels, model comparison data — the brand shows the product chrome at scale rather than abstract marketing illustrations.
 - Light cream feature cards (`{colors.surface-card}` — #efe9de) — slightly darker than canvas, used for content-driven feature explanations.
 - Anthropic radial-spike mark — a small black asterisk-like glyph (4-spoke radial) — appears as the brand wordmark prefix and as a content marker.
 - Border radius is hierarchical: `{rounded.md}` (8px) for buttons + inputs, `{rounded.lg}` (12px) for content + product cards, `{rounded.xl}` (16px) for the hero illustration container, `{rounded.pill}` for badges.
@@ -24,11 +24,11 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 ## Colors
 
 ### Brand & Accent
-- **Coral / Primary** (`{colors.primary}` — #cc785c): The signature Anthropic warm coral. Used on every primary CTA background, on full-bleed coral callout cards, on the brand wordmark accent. The most-recognized Anthropic color outside of the spike-mark logo.
-- **Coral Active** (`{colors.primary-active}` — #a9583e): The press / hover-darker variant.
-- **Coral Disabled** (`{colors.primary-disabled}` — #e6dfd8): A desaturated cream-tinted disabled state.
-- **Accent Teal** (`{colors.accent-teal}` — #5db8a6): Used sparingly on secondary product surfaces (terminal status indicators, "active connection" dots in connectors page).
-- **Accent Amber** (`{colors.accent-amber}` — #e8a55a): A small companion warm-tone used on category badges and inline highlights.
+- **Ink / Primary** (`{colors.primary}` — #141413): The accent — warm ink black. Used on every primary CTA background, on inline links, and on the full-bleed callout band. On dark product surfaces the accent **flips to cream** (`{colors.on-dark}`), since near-black is invisible on dark — so the chart's TKM bar, the slider thumb, and the how-step tick render cream on dark.
+- **Primary Active** (`{colors.primary-active}` — #000000): The press / darker variant (pure black).
+- **Primary Disabled** (`{colors.primary-disabled}` — #d8d0c2): A desaturated cream-tinted disabled state.
+- **Logo Coral** (#cc785c): The single surviving coral — *only* the small diamond accent inside the TKM monogram logo (`Brand.astro` / `favicon.svg`). Never used anywhere else; not a system token.
+- **Accent Amber** (`{colors.accent-amber}` — #e8a55a): A small companion warm-tone for decorative moments only — the hero's cursor-follow glow, the review-mockup highlight, the products mini-visual mark. Never a primary accent.
 
 ### Surface
 - **Canvas** (`{colors.canvas}` — #faf9f5): The default page floor. Tinted cream — warm, deliberately not pure white.
@@ -38,7 +38,7 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 - **Surface Dark** (`{colors.surface-dark}` — #181715): Code editor mockups, model showcase cards, footer. The dominant dark surface.
 - **Surface Dark Elevated** (`{colors.surface-dark-elevated}` — #252320): Elevated cards inside dark bands (settings panels in mockups).
 - **Surface Dark Soft** (`{colors.surface-dark-soft}` — #1f1e1b): Slightly lighter dark, used for code block backgrounds inside larger dark cards.
-- **Hairline** (`{colors.hairline}` — #e6dfd8): The 1px border tone on cream surfaces. Same hex as `{colors.primary-disabled}` — borders feel like one elevation step rather than ink lines.
+- **Hairline** (`{colors.hairline}` — #e6dfd8): The 1px border tone on cream surfaces — borders feel like one elevation step rather than ink lines.
 - **Hairline Soft** (`{colors.hairline-soft}` — #ebe6df): Barely-visible divider used inside the same band.
 
 ### Text
@@ -47,7 +47,7 @@ The dark surfaces are where Claude shows its product chrome — code blocks, ter
 - **Body** (`{colors.body}` — #3d3d3a): Default running-text color.
 - **Muted** (`{colors.muted}` — #6c6a64): Sub-headings, breadcrumbs, footer-adjacent secondary text.
 - **Muted Soft** (`{colors.muted-soft}` — #8e8b82): Captions, fine-print, copyright lines.
-- **On Primary** (`{colors.on-primary}` — #ffffff): Text on coral buttons.
+- **On Primary** (`{colors.on-primary}` — #ffffff): Text on the ink-black buttons and the full-bleed ink callout band.
 - **On Dark** (`{colors.on-dark}` — #faf9f5): Cream-tinted white used on dark surfaces (echoes the canvas tone).
 - **On Dark Soft** (`{colors.on-dark-soft}` — #a09d96): Footer body text, secondary labels in dark mockups.
 
@@ -100,7 +100,7 @@ Google Sans and Inter are both free, loadable Google Fonts — no substitution n
 - **Tokens:** `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 96px.
 - **Section padding:** `{spacing.section}` (96px) — modern-SaaS rhythm.
 - **Card internal padding:** `{spacing.xl}` (32px) for feature cards, pricing tier cards, model comparison cards; `{spacing.lg}` (24px) for code-window cards and connector tiles.
-- **Callout / CTA bands:** `{spacing.xxl}` (48px) inside coral callout cards; 64px inside the larger dark CTA band.
+- **Callout / CTA bands:** `{spacing.xxl}` (48px) inside the ink callout card; 64px inside the larger dark CTA band.
 
 ### Grid & Container
 - **Max content width:** ~1200px centered.
@@ -127,7 +127,7 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 ### Decorative Depth
 - The Anthropic spike-mark glyph (4-spoke radial asterisk) appears as a small black mark in the brand wordmark and inline as a content marker.
 - Code editor mockups carry their own internal depth: syntax-highlighted text in muted blues / oranges / grays, line numbers in `{colors.muted-soft}`, status bars at the bottom in `{colors.surface-dark-elevated}`.
-- Some hero illustrations use simple line-art with coral and dark-navy strokes on cream — minimal, hand-drawn-feeling, never photorealistic.
+- Some hero illustrations use simple line-art with ink strokes on cream — minimal, hand-drawn-feeling, never photorealistic.
 
 ## Shapes
 
@@ -145,7 +145,7 @@ The elevation philosophy is **color-block first, shadow rare**. Most depth comes
 
 ### Photography & Illustrations
 Claude's hero rarely uses photography. Instead it uses:
-- Simple line-art illustrations with coral + dark-navy strokes on the cream canvas
+- Simple line-art illustrations with ink strokes on the cream canvas
 - Code editor mockups (the dominant "hero" treatment on developer-focused pages)
 - Terminal output mockups with monospace text on dark
 - Model comparison cards (Opus / Sonnet / Haiku) with abstract geometric thumbnails
@@ -156,11 +156,11 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### Top Navigation
 
-**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the Anthropic spike-mark + "Claude" wordmark at left, primary horizontal menu (Product, Solutions, Use Cases, Pricing, Research, Company) center-left, right-side cluster with "Sign in" text-link, "Try Claude" `{component.button-primary}` (coral). Menu items in `{typography.nav-link}` (Inter 14px / 500).
+**`top-nav`** — Cream nav bar pinned to the top of every page. 64px tall, `{colors.canvas}` background. Carries the Anthropic spike-mark + "Claude" wordmark at left, primary horizontal menu (Product, Solutions, Use Cases, Pricing, Research, Company) center-left, right-side cluster with "Sign in" text-link, "Try Claude" `{component.button-primary}` (ink). Menu items in `{typography.nav-link}` (Inter 14px / 500).
 
 ### Buttons
 
-**`button-primary`** — The signature coral CTA. Background `{colors.primary}` (#cc785c), text `{colors.on-primary}` (white), type `{typography.button}` (Inter 14px / 500), padding 12px × 20px, height 40px, rounded `{rounded.md}` (8px). Active state `button-primary-active` darkens to `{colors.primary-active}` (#a9583e).
+**`button-primary`** — The signature ink CTA. Background `{colors.primary}` (#141413), text `{colors.on-primary}` (white), type `{typography.button}` (Inter 14px / 500), padding 12px × 20px, height 40px, rounded `{rounded.md}` (8px). Active state `button-primary-active` darkens to `{colors.primary-active}` (#000000).
 
 **`button-secondary`** — Cream button with hairline outline. Background `{colors.canvas}`, text `{colors.ink}`, 1px hairline border, same padding + height + radius as primary.
 
@@ -170,17 +170,17 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`button-icon-circular`** — 36px circular icon button. Background `{colors.canvas}`, hairline border, ink-color icon. Used for carousel arrows, share, "view more".
 
-**`text-link`** — Inline body links in `{colors.primary}` (the coral). Underlined on press; the coral inline link is one of the system's most distinctive small details.
+**`text-link`** — Inline body links in `{colors.primary}` (ink), underlined (e.g. prose links, "read more"). A quiet, high-contrast detail rather than a colored pop.
 
 ### Cards & Containers
 
 **`hero-band`** — Cream-canvas hero with a 6-6 grid: h1 + sub-headline + button row on the left, hero illustration card or product mockup card on the right. Vertical padding `{spacing.section}` (96px).
 
-**`hero-illustration-card`** — A larger card holding the hero's right-side artifact — sometimes a coral-stroke line illustration on cream background, sometimes a dark code editor mockup. Background `{colors.canvas}` or `{colors.surface-dark}` depending on context, rounded `{rounded.xl}` (16px).
+**`hero-illustration-card`** — A larger card holding the hero's right-side artifact — sometimes an ink-stroke line illustration on cream, more often a dark product mockup (the savings chart on Uniro, the review mockup on PaperMentor). Background `{colors.canvas}` or `{colors.surface-dark}` depending on context, rounded `{rounded.xl}` (16px).
 
 **`feature-card`** — Used in 3-up feature grids. Background `{colors.surface-card}` (#efe9de — slightly darker cream), rounded `{rounded.lg}` (12px), internal padding `{spacing.xl}` (32px). Carries a small icon at top, an `{typography.title-md}` headline, and a body description in `{typography.body-md}`.
 
-**`product-mockup-card-dark`** — Dark navy card showing actual Claude product chrome (chat interface, code editor, agent controls). Background `{colors.surface-dark}`, rounded `{rounded.lg}`, internal padding `{spacing.xl}` (32px). Carries text labels in `{colors.on-dark}` and product UI fragments below.
+**`product-mockup-card-dark`** — Warm dark card showing actual product chrome (chat interface, code editor, agent controls). Background `{colors.surface-dark}`, rounded `{rounded.lg}`, internal padding `{spacing.xl}` (32px). Carries text labels in `{colors.on-dark}` and product UI fragments below.
 
 **`code-window-card`** — A specialized dark card showing a code editor with line numbers, syntax-highlighted code in `{typography.code}` (JetBrains Mono), and sometimes a "Run" button or terminal output panel below. Background `{colors.surface-dark}` with `{colors.surface-dark-soft}` for the inner code block, rounded `{rounded.lg}`, padding `{spacing.lg}` (24px). The signature visual element of Claude Code product pages.
 
@@ -190,7 +190,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`pricing-tier-card-featured`** — The featured tier (typically "Pro" or "Team"). Background flips to `{colors.surface-dark}`, text inverts to `{colors.on-dark}`. The dark surface IS the featured-tier signal.
 
-**`callout-card-coral`** — A full-bleed coral card carrying a major call-to-action. Background `{colors.primary}` (#cc785c), text `{colors.on-primary}` (white), rounded `{rounded.lg}`, padding `{spacing.xxl}` (48px). The coral surface IS the voltage; the CTA inside uses an inverted button style (cream/canvas button on coral).
+**`callout-card-ink`** — A full-bleed ink card carrying a major call-to-action. Background `{colors.primary}` (#141413), text `{colors.on-primary}` (white), rounded `{rounded.lg}`, padding `{spacing.xxl}` (48px). The ink surface IS the voltage; the CTA inside uses an inverted button style (cream/canvas button on ink).
 
 **`connector-tile`** — Used on the connectors page's integration grid. Background `{colors.canvas}` with hairline border, rounded `{rounded.lg}`, padding 20px. Each tile carries a logo at top, a `{typography.title-sm}` connector name, and a short description.
 
@@ -198,7 +198,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`text-input`** — Standard text input. Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-md}`, rounded `{rounded.md}` (8px), padding 10px × 14px, height 40px. 1px hairline border in `{colors.hairline}`.
 
-**`text-input-focused`** — Focus state. Border thickens or shifts to `{colors.primary}` (coral) for emphasis. Carries a 3px coral-at-15%-alpha outer ring.
+**`text-input-focused`** — Focus state. Border/ring shifts to `{colors.primary}` (ink) for emphasis on cream. On the ink CTA band the email input instead rings cream-at-40%-alpha (white on ink).
 
 **`cookie-consent-card`** — Bottom-right floating dark cookie banner. Background `{colors.surface-dark}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.lg}` (24px). One of the few places dark surface appears at small scale on cream pages.
 
@@ -206,7 +206,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 **`badge-pill`** — Small pill label used for category tags. Background `{colors.surface-card}`, text `{colors.ink}`, type `{typography.caption}` (13px / 500), rounded `{rounded.pill}`, padding 4px × 12px.
 
-**`badge-coral`** — Coral-fill badge for "NEW", "BETA", featured highlights. Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.caption-uppercase}` (12px / 500 / 1.5px tracking), rounded `{rounded.pill}`, padding 4px × 12px.
+**`badge-ink`** — Ink-fill badge for "NEW", "BETA", featured highlights (e.g. the hero pill's tag). Background `{colors.ink}`, text `{colors.on-dark}`, type `{typography.caption-uppercase}` (12px / 500 / 1.5px tracking), rounded `{rounded.pill}`, padding 4px × 12px.
 
 ### Tab / Filter
 
@@ -214,30 +214,30 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 
 ### CTA / Footer
 
-**`cta-band-coral`** — A pre-footer "Try Claude" CTA card. Full-width coral fill, white type, rounded `{rounded.lg}`, padding 64px. Carries an h2 in `{typography.display-sm}` (still Google Sans!), a sub-line, and a cream-button CTA.
+**`cta-band-ink`** — The pre-footer CTA card (`CTA.astro`). Full-width ink fill (#141413), white type, rounded `{rounded.lg}`, padding 64px. Carries an h2 in `{typography.display-sm}` (still Google Sans!), a sub-line, and a cream-button CTA.
 
 **`cta-band-dark`** — Alternative pre-footer band on developer-focused pages. Background `{colors.surface-dark}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding 64px. Often pairs with a code-window card.
 
-**`footer`** — Dark navy footer that closes every page. Background `{colors.surface-dark}` (#181715), text `{colors.on-dark-soft}`. 4-column link list at desktop covering Product / Company / Resources / Legal. Vertical padding 64px. The Anthropic spike-mark + "Anthropic" wordmark sits at the top in `{colors.on-dark}`. The footer never inverts.
+**`footer`** — Warm dark footer that closes every page. Background `{colors.surface-dark}` (#181715), text `{colors.on-dark-soft}`. Multi-column link list (Products / Company) with the brand lockup at top in `{colors.on-dark}` — the TKM monogram's letters flip to cream here via `currentColor`, while its coral diamond stays. Vertical padding 64px. The footer never inverts.
 
 ## Do's and Don'ts
 
 ### Do
 - Anchor every page on the cream canvas. Pure white reads as "any other AI tool"; the warm tint is the brand differentiator.
 - Use Google Sans for every display headline. Pair with Inter body. Negative letter-spacing on display sizes is non-negotiable.
-- Reserve `{colors.primary}` (coral) for primary CTAs and full-bleed `{component.callout-card-coral}` moments. Don't paint accent moments coral elsewhere.
+- Reserve `{colors.primary}` (ink) for primary CTAs, inline links, and the full-bleed `{component.callout-card-ink}` band. Don't scatter the accent onto incidental elements.
 - Use `{component.product-mockup-card-dark}` and `{component.code-window-card}` to show actual Claude product chrome. Don't paint marketing illustrations of code when you can show real code.
-- Pair `{component.feature-card}` (cream) with `{component.product-mockup-card-dark}` (navy) in alternating bands. The cream-to-dark rhythm is the brand's pacing mechanism.
+- Pair `{component.feature-card}` (cream) with `{component.product-mockup-card-dark}` (warm dark) in alternating bands. The cream-to-dark rhythm is the brand's pacing mechanism.
 - Use the Anthropic spike-mark glyph as the brand wordmark prefix. Never invert the mark to white-on-dark within the wordmark itself.
 - Apply `{spacing.section}` (96px) between major bands.
 
 ### Don't
 - Don't use cool grays or pure white for canvas. Cream is the brand.
 - Don't over-weight the display. Google Sans at 700+ reads bombastic at large sizes; the system stays at 600.
-- Don't use cool blue or saturated cyan as a brand accent. The coral is the brand voltage.
-- Don't put coral everywhere. The coral is scarce on individual elements and generous only on full-bleed coral callout cards.
+- Don't introduce a colored brand accent (coral, teal, blue, cyan). The accent is ink black; high contrast on cream is the brand voltage.
+- Don't paint the accent everywhere. Ink is scarce on individual elements and generous only on the full-bleed ink callout band.
 - Don't use Inter for display headlines — Google Sans is the display face; Inter is body only. Keeping the two sans faces distinct is the brand voice.
-- Don't repeat the same surface mode in two consecutive bands. The pacing alternates: cream → cream-card → dark-mockup → cream → coral-callout → dark-footer.
+- Don't repeat the same surface mode in two consecutive bands. The pacing alternates: cream → cream-card → dark-mockup → cream → ink-callout → dark-footer.
 - Don't add hover state styling beyond what the system already encodes — primary darkens on press; nothing else changes.
 
 ## Responsive Behavior
@@ -276,7 +276,7 @@ When photography is used (rare — mostly testimonials), avatars crop to perfect
 3. Use `{token.refs}` everywhere — never inline hex.
 4. Never document hover. Default and Active/Pressed states only.
 5. Display headlines stay Google Sans 600 with negative tracking. Body stays Inter 400. The display/body split is unbreakable.
-6. Cream + coral + dark navy is the trinity. Don't introduce a fourth surface tone (no purple cards, no green sections).
+6. Cream + ink-black + warm-dark is the trinity (amber is a rare decorative accent; coral lives only in the logo). Don't introduce a fourth surface tone (no purple cards, no green sections).
 7. When in doubt about emphasis: bigger Google Sans before bolder weight.
 
 ## Known Gaps
